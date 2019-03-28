@@ -1,45 +1,51 @@
-package main
+package statuspage
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/hashicorp/terraform/helper/schema"
-	gostatuspage "github.com/yannh/terraform-provider-statuspage/go-statuspage"
+	"github.com/hashicorp/terraform/helper/validation"
+	sp "github.com/yannh/statuspage-go-sdk"
 )
 
 func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
-	client := m.(*gostatuspage.Client)
-	id, err := client.CreateComponent(d.Get("page_id").(string), &gostatuspage.Component{
-		Name:               d.Get("name").(string),
-		Description:        d.Get("description").(string),
-		GroupID:            d.Get("group_id").(string),
-		OnlyShowIfDegraded: d.Get("only_show_if_degraded").(bool),
-		Status:             d.Get("status").(string),
-		Showcase:           d.Get("showcase").(bool),
-	})
+	client := m.(*sp.Client)
+	component, err := sp.CreateComponent(
+		client, d.Get("page_id").(string),
+		&sp.Component{
+			Name:               d.Get("name").(string),
+			Description:        d.Get("description").(string),
+			OnlyShowIfDegraded: d.Get("only_show_if_degraded").(bool),
+			Status:             d.Get("status").(string),
+			Showcase:           d.Get("showcase").(bool),
+		},
+	)
 	if err != nil {
 		log.Printf("[WARN] Statuspage Failed creating component: %s\n", err)
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created: %s\n", id)
-	d.SetId(id)
+	log.Printf("[INFO] Statuspage Created: %s\n", component.ID)
+	d.SetId(component.ID)
 
 	return resourceComponentRead(d, m)
 }
 
 func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
-	client := m.(*gostatuspage.Client)
-	component, err := client.GetComponent(d.Get("page_id").(string), d.Id())
+	client := m.(*sp.Client)
+	component, err := sp.GetComponent(client, d.Get("page_id").(string), d.Id())
+	if err != nil {
+		log.Printf("[ERROR] Statuspage could not find component with ID: %s\n", d.Id())
+		return err
+	}
+
 	if component == nil {
+		log.Printf("[INFO] Statuspage could not find component with ID: %s\n", d.Id())
 		d.SetId("")
 		return nil
 	}
 
-	if err != nil {
-		return err
-	}
+	log.Printf("[INFO] Statuspage read: %s\n", component.ID)
 
 	d.Set("name", component.Name)
 	d.Set("description", component.Description)
@@ -52,16 +58,16 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
-	client := m.(*gostatuspage.Client)
+	client := m.(*sp.Client)
 	componentID := d.Id()
 
-	err := client.UpdateComponent(
+	_, err := sp.UpdateComponent(
+		client,
 		d.Get("page_id").(string),
 		componentID,
-		&gostatuspage.Component{
+		&sp.Component{
 			Name:               d.Get("name").(string),
 			Description:        d.Get("description").(string),
-			GroupID:            d.Get("group_id").(string),
 			OnlyShowIfDegraded: d.Get("only_show_if_degraded").(bool),
 			Status:             d.Get("status").(string),
 			Showcase:           d.Get("showcase").(bool),
@@ -78,9 +84,9 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceComponentDelete(d *schema.ResourceData, m interface{}) error {
-	client := m.(*gostatuspage.Client)
+	client := m.(*sp.Client)
 
-	return client.DeleteComponent("8l7wwkjhvgg7", d.Id())
+	return sp.DeleteComponent(client, d.Get("page_id").(string), d.Id())
 }
 
 func resourceComponent() *schema.Resource {
@@ -106,25 +112,13 @@ func resourceComponent() *schema.Resource {
 			"status": &schema.Schema{
 				Type:     schema.TypeString,
 				Optional: true,
-				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
-					v := val.(string)
-					allowed_values := []string{"operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage", ""}
-					for _, allowed_value := range allowed_values {
-						if v == allowed_value {
-							return nil, nil
-						}
-					}
-
-					errs = append(errs, fmt.Errorf("%q must be one of %v, got: %s", key, allowed_values, v))
-					return nil, errs
-				},
+				ValidateFunc: validation.StringInSlice(
+					[]string{"operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage", ""},
+					false,
+				),
 			},
 			"only_show_if_degraded": &schema.Schema{
 				Type:     schema.TypeBool,
-				Optional: true,
-			},
-			"group_id": &schema.Schema{
-				Type:     schema.TypeString,
 				Optional: true,
 			},
 			"showcase": &schema.Schema{
