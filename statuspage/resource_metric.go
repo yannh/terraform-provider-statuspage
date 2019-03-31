@@ -115,11 +115,11 @@ func resourceMetric() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"page_id": &schema.Schema{
 				Type:     schema.TypeString,
-				Optional: true,
+				Required: true,
 			},
 			"metrics_provider_id": &schema.Schema{
 				Type:     schema.TypeString,
-				Optional: true,
+				Required: true,
 			},
 			"name": &schema.Schema{
 				Type:     schema.TypeString,

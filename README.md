@@ -12,10 +12,32 @@ Usage
 
 ```
 resource "statuspage_component" "my_component" {
-    page_id = "pageid"
-    name = "My Website"
+    page_id     = "pageid"
+    name        = "My Website"
     description = "Status of my website"
-    status = "operational"
+    status      = "operational"
+}
+
+resource "statuspage_component_group" "my_group" {
+    page_id     = "pageid"
+    name        = "terraform"
+    description = "Created by terraform"
+    components  = ["${statuspage_component.my_component.id}"]
+}
+
+resource "statuspage_metrics_provider" "statuspage_pingdom" {
+    page_id         = "pageid"
+    email           = "myemail@provider.com"
+    password        = "pingdom_password"
+    application_key = "pingdomAppKey"
+    type            = "Pingdom"
+}
+
+resource "statuspage_metric" "website_metrics" {
+    page_id            = "pageid"
+    metric_provider_id = "${statuspage_metrics_provider.statuspage_pingdom.id}"
+    name               = "My Website"
+    metric_identifier  = "pingdom_check_id"
 }
 ```
 
