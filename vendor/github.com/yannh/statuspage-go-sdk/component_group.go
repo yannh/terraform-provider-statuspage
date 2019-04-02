@@ -51,7 +51,9 @@ func UpdateComponentGroup(client *Client, pageID, componentGroupID string, compo
 		pageID,
 		"component-group",
 		componentGroupID,
-		componentGroup, // ComponentGroups do not need to be wrapped in updates
+		struct {
+			ComponentGroup *ComponentGroup `json:"component_group"`
+		}{componentGroup},
 		&cg,
 	)
 
