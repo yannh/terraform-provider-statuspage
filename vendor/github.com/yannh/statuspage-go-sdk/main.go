@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"time"
 )
@@ -16,6 +15,10 @@ const apiRoot = "https://api.statuspage.io/v1"
 // HTTPClient is the http wrapper for the application
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
+}
+
+type IClient interface {
+	doHTTPRequest(method, endpoint string, item interface{}) (resp *http.Response, err error)
 }
 
 type Client struct {
@@ -43,7 +46,6 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 
 	if item != nil {
 		data, err := json.Marshal(item)
-		log.Printf("Statuspage Data %s\n", data)
 		if err != nil {
 			return nil, err
 		}
@@ -70,7 +72,7 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 	return resp, err
 }
 
-func createResource(client *Client, pageID, resourceType string, resource, result interface{}) error {
+func createResource(client IClient, pageID, resourceType string, resource, result interface{}) error {
 	resp, err := client.doHTTPRequest(
 		"POST",
 		"/pages/"+pageID+"/"+resourceType+"s",
@@ -92,7 +94,7 @@ func createResource(client *Client, pageID, resourceType string, resource, resul
 	return fmt.Errorf("Failed creating %s, request returned %d", resourceType, resp.StatusCode)
 }
 
-func readResource(client *Client, pageID, ID, resourceType string, target interface{}) error {
+func readResource(client IClient, pageID, ID, resourceType string, target interface{}) error {
 	resp, err := client.doHTTPRequest(
 		"GET",
 		"/pages/"+pageID+"/"+resourceType+"s/"+ID,
@@ -113,7 +115,7 @@ func readResource(client *Client, pageID, ID, resourceType string, target interf
 	return fmt.Errorf("[ERROR] Statuspage could not find %s with ID: %s, http status %d", resourceType, ID, resp.StatusCode)
 }
 
-func updateResource(client *Client, pageID, resourceType, ID string, resource interface{}, result interface{}) error {
+func updateResource(client IClient, pageID, resourceType, ID string, resource interface{}, result interface{}) error {
 	resp, err := client.doHTTPRequest(
 		"PATCH",
 		"/pages/"+pageID+"/"+resourceType+"s/"+ID,
@@ -136,7 +138,7 @@ func updateResource(client *Client, pageID, resourceType, ID string, resource in
 	return fmt.Errorf("Failed updating %s, request returned %d", resourceType, resp.StatusCode)
 }
 
-func deleteResource(client *Client, pageID, resourceType, ID string) error {
+func deleteResource(client IClient, pageID, resourceType, ID string) error {
 	resp, err := client.doHTTPRequest(
 		"DELETE",
 		"/pages/"+pageID+"/"+resourceType+"s/"+ID,
