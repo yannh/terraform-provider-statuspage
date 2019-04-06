@@ -123,6 +123,6 @@ func TestCreateResource(t *testing.T) {
 	}
 
 	if target.Name != nameShouldBe {
-		t.Errorf("Failed to read resources: %s, %s", nameShouldBe, target.Name)
+		t.Errorf("Failed to read resources, body should be. %s, got: %s", nameShouldBe, target.Name)
 	}
 }
