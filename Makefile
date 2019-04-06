@@ -13,7 +13,7 @@ test: vet
 	go test $(TEST)
 
 build:
-	go install
+	go install -tags netgo -ldflags '-extldflags "-static"'
 
 init: test build
 	terraform init -plugin-dir $(GOPATH)bin
