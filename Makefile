@@ -2,11 +2,12 @@
 
 TFPLAN ?= plan.tfplan
 TEST?=$$(go list ./... |grep -v 'vendor')
+export CGO_ENABLED = 0
 
 all: plan
 
 vet:
-	CGO_ENABLED=0 go vet ./...
+	go vet ./...
 
 test: vet
 	go test $(TEST)
