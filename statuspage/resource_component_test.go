@@ -41,5 +41,5 @@ func testAccComponent_basic(rand int) string {
 		description = "test component"
 		status = "operational"
 	}
-	`, rand, "8l7wwkjhvgg7")
+	`, rand, pageID)
 }
