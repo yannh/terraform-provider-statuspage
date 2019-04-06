@@ -1,0 +1,27 @@
+image: golang:1.12-alpine
+
+stages:
+  - test
+  - build
+
+before_script:
+  - apk add --no-cache make git
+  - mkdir -p /go/src/github.com/yannh
+  - cp -r $CI_PROJECT_DIR /go/src/github.com/yannh/terraform-provider-statuspage
+  - cd /go/src/github.com/yannh/terraform-provider-statuspage
+
+test:
+  stage: test
+  script:
+  - make test
+
+build:
+  stage: build
+  script:
+  - make build
+  - cp ${GOPATH}bin/terraform-provider-statuspage ${CI_PROJECT_DIR}/
+  artifacts:
+    name: "$CI_PROJECT_NAME"
+    paths:
+    - terraform-provider-statuspage
+when: on_success
