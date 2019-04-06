@@ -8,20 +8,35 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
 
 const apiRoot = "https://api.statuspage.io/v1"
 
+// HTTPClient is the http wrapper for the application
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+
 type Client struct {
-	token string
+	token      string
+	httpClient HTTPClient
 }
 
 func NewClient(token string) *Client {
-	return &Client{token}
+	return &Client{
+		token:      token,
+		httpClient: &http.Client{},
+	}
+}
+
+// Allows overriding the HTTP Client, leaving the choice
+// of using a retry library to the user
+func (client *Client) UseHTTPClient(httpClient HTTPClient) {
+	client.httpClient = httpClient
 }
 
 func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (resp *http.Response, err error) {
-	httpClient := &http.Client{}
 	componentURL := apiRoot + endpoint
 
 	var body io.Reader
@@ -41,7 +56,17 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 	}
 	req.Header.Set("Authorization", "OAuth "+client.token)
 
-	return httpClient.Do(req)
+	maxRetries := 10
+	retryInterval := 5 * time.Second
+
+	// Basic Retry logic around rate limiting
+	resp, err = client.httpClient.Do(req)
+	for retries := 1; resp.Status == "429" && retries <= maxRetries; retries = retries + 1 {
+		time.Sleep(retryInterval)
+		resp, err = client.httpClient.Do(req)
+	}
+
+	return resp, err
 }
 
 func createResource(client *Client, pageID, resourceType string, resource, result interface{}) error {

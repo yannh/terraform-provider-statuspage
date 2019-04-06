@@ -6,3 +6,4 @@
  * Component Group update: block should be wrapped in a component_group object
  * component-groups vs component_group in URL
  * 500 errors on updates
+ * Undocumented rate limiting behaviour
