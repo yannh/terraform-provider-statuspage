@@ -61,7 +61,8 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 
 	// Basic Retry logic around rate limiting
 	resp, err = client.httpClient.Do(req)
-	for retries := 1; resp.Status == "429" && retries <= maxRetries; retries = retries + 1 {
+	retries := 0
+	for retries = 1; resp != nil && resp.Status == "429" && retries <= maxRetries; retries = retries + 1 {
 		time.Sleep(retryInterval)
 		resp, err = client.httpClient.Do(req)
 	}
