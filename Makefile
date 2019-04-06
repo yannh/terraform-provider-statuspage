@@ -6,7 +6,7 @@ TEST?=$$(go list ./... |grep -v 'vendor')
 all: plan
 
 vet:
-	go vet ./...
+	CGO_ENABLED=0 go vet ./...
 
 test: vet
 	go test $(TEST)
