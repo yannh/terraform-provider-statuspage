@@ -91,7 +91,7 @@ func createResource(client IClient, pageID, resourceType string, resource, resul
 		return json.Unmarshal(bodyBytes, &result)
 	}
 
-	return fmt.Errorf("Failed creating %s, request returned %d", resourceType, resp.StatusCode)
+	return fmt.Errorf("failed creating %s, request returned %d", resourceType, resp.StatusCode)
 }
 
 func readResource(client IClient, pageID, ID, resourceType string, target interface{}) error {
@@ -112,7 +112,7 @@ func readResource(client IClient, pageID, ID, resourceType string, target interf
 		}
 		return json.Unmarshal(bodyBytes, target)
 	}
-	return fmt.Errorf("[ERROR] Statuspage could not find %s with ID: %s, http status %d", resourceType, ID, resp.StatusCode)
+	return fmt.Errorf("could not find %s with ID: %s, http status %d", resourceType, ID, resp.StatusCode)
 }
 
 func updateResource(client IClient, pageID, resourceType, ID string, resource interface{}, result interface{}) error {
@@ -135,7 +135,7 @@ func updateResource(client IClient, pageID, resourceType, ID string, resource in
 		return json.Unmarshal(bodyBytes, &result)
 	}
 
-	return fmt.Errorf("Failed updating %s, request returned %d", resourceType, resp.StatusCode)
+	return fmt.Errorf("failed updating %s, request returned %d", resourceType, resp.StatusCode)
 }
 
 func deleteResource(client IClient, pageID, resourceType, ID string) error {
@@ -148,10 +148,10 @@ func deleteResource(client IClient, pageID, resourceType, ID string) error {
 		return err
 	}
 
-	// StatusGroup deletion returns StatusOK instead of StatsNoContent like other resources
+	// StatusGroup deletion returns StatusOK instead of StatusNoContent like other resources
 	if resp.StatusCode == http.StatusNoContent || resp.StatusCode == http.StatusOK {
 		return nil
 	}
 
-	return fmt.Errorf("Failed deleting %s, request returned %d", resourceType, resp.StatusCode)
+	return fmt.Errorf("failed deleting %s, request returned %d", resourceType, resp.StatusCode)
 }

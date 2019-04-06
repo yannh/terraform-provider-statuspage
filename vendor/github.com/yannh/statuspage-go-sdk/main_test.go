@@ -111,18 +111,18 @@ func TestDoHTTPRequest(t *testing.T) {
 }
 
 func TestCreateResource(t *testing.T) {
-	nameShouldBe := "resource name"
-	r := &http.Response{StatusCode: http.StatusCreated, Body: ioutil.NopCloser(bytes.NewReader([]byte("{\"Name\":\"" + nameShouldBe + "\"}")))}
+	resourceName := "resource name"
+	r := &http.Response{StatusCode: http.StatusCreated, Body: ioutil.NopCloser(bytes.NewReader([]byte("{\"Name\":\"" + resourceName + "\"}")))}
 	client := NewMockClient(r, nil)
 
 	target := struct{ Name string }{}
-	err := createResource(client, "somePageID", "component", struct{ Name string }{nameShouldBe}, &target)
+	err := createResource(client, "somePageID", "component", struct{ Name string }{resourceName}, &target)
 
 	if err != nil {
 		t.Errorf("Error while creating resource: %+v", err)
 	}
 
-	if target.Name != nameShouldBe {
-		t.Errorf("Failed to read resources, body should be. %s, got: %s", nameShouldBe, target.Name)
+	if target.Name != resourceName {
+		t.Errorf("Failed to read resources, body should be. %s, got: %s", resourceName, target.Name)
 	}
 }
