@@ -11,10 +11,10 @@ vet:
 test: vet
 	go test $(TEST)
 
-build: test
+build:
 	go install
 
-init: build
+init: test build
 	terraform init -plugin-dir $(GOPATH)bin
 
 plan: init

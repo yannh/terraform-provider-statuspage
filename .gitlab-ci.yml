@@ -24,4 +24,4 @@ build:
     name: "$CI_PROJECT_NAME"
     paths:
     - terraform-provider-statuspage
-when: on_success
+    when: on_success
