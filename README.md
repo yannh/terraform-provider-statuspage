@@ -41,6 +41,11 @@ resource "statuspage_metric" "website_metrics" {
 }
 ```
 
+Download
+--------
+
+You can download the [latest build from Gitlab](https://gitlab.com/yannhamon/terraform-provider-statuspage/-/jobs/artifacts/master/download?job=build)
+
 Building The Provider
 ---------------------
 

@@ -20,7 +20,7 @@ build:
   stage: build
   script:
   - make build
-  - cp ${GOPATH}bin/terraform-provider-statuspage ${CI_PROJECT_DIR}/
+  - cp /go/bin/terraform-provider-statuspage ${CI_PROJECT_DIR}/
   artifacts:
     name: "$CI_PROJECT_NAME"
     paths:
