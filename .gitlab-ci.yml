@@ -25,4 +25,5 @@ build:
     name: "$CI_PROJECT_NAME"
     paths:
     - terraform-provider-statuspage
+    - LICENSE
     when: on_success
