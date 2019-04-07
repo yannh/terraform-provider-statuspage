@@ -8,21 +8,12 @@ Authentication currently works by setting the environment variable STATUSPAGE_TO
 
 You can download the [latest build from Gitlab](https://gitlab.com/yannhamon/terraform-provider-statuspage/-/jobs/artifacts/master/download?job=build)
 
-## Example Usage
 
-```
-resource "statuspage_component" "my_component" {
-    ...
-}
-```
-
-## Supported resources
-
-### statuspage_component
+## statuspage_component
 
 Components are the individual pieces of infrastructure that are listed on your status page.
 
-#### Example usage
+### Example usage
 
 ```
 resource "statuspage_component" "my_component" {
@@ -33,9 +24,60 @@ resource "statuspage_component" "my_component" {
 }
 ```
 
-#### Argument Reference
+### Argument Reference
 
+The following arguments are supported:
 
+ * page_id - (Required) the id of the page this component belongs to
+ * name - (Required) Name of the component
+ * description - Description of the component
+ * status - status of the component - must be one of "operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage" or ""
+ * only_show_if_degraded (bool) - Requires a special feature flag to be enabled
+ * showcase (bool) - Should this component be showcased
+
+## statuspage_component_group
+
+Component groups provide a way to organize components. When a group is deleted, its child components will be orphaned. Note: A group cannot be empty, so if all the child components are deleted, the group will be deleted automatically. Another implication of this is that components must be created before their groups, when a group is created it will require a list of component IDs.
+
+### Example usage
+
+```
+resource "statuspage_component_group" "my_group" {
+    page_id     = "pageid"
+    name        = "terraform"
+    description = "Created by terraform"
+    components  = ["${statuspage_component.my_component.id}"]
+}
+```
+
+## statuspage_metrics
+
+System metrics are a great way to build trust and transparency around your organization, and ensure that your page is doing work for you each and every day.
+
+### Example usage
+
+```
+resource "statuspage_metric" "website_metrics" {
+    page_id            = "pageid"
+    metric_provider_id = "${statuspage_metrics_provider.statuspage_pingdom.id}"
+    name               = "My Website"
+    metric_identifier  = "pingdom_check_id"
+}
+```
+
+## statuspage_metrics_provider
+
+### Example usage
+
+```
+resource "statuspage_metrics_provider" "statuspage_pingdom" {
+    page_id         = "pageid"
+    email           = "myemail@provider.com"
+    password        = "pingdom_password"
+    application_key = "pingdomAppKey"
+    type            = "Pingdom"
+}
+```
 
 ## Requirements
 
