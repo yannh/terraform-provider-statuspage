@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/terraform-provider-statuspage/commits/master)
+
 # Terraform Provider for Statuspage.io
 
 The Statuspage provider is used to interact with the resources supported by Statuspage.io.
