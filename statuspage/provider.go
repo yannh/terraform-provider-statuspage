@@ -1,9 +1,6 @@
 package statuspage
 
 import (
-	"log"
-	"os"
-
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
 	sp "github.com/yannh/statuspage-go-sdk"
@@ -11,6 +8,13 @@ import (
 
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
+		Schema: map[string]*schema.Schema{
+			"token": {
+				Type:        schema.TypeString,
+				Required:    true,
+				DefaultFunc: schema.EnvDefaultFunc("STATUSPAGE_TOKEN", ""),
+			},
+		},
 		ResourcesMap: map[string]*schema.Resource{
 			"statuspage_component":        resourceComponent(),
 			"statuspage_component_group":  resourceComponentGroup(),
@@ -22,13 +26,5 @@ func Provider() terraform.ResourceProvider {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	var token string
-
-	log.Printf("[INFO] Initializing Statuspage client\n")
-
-	if v := os.Getenv("STATUSPAGE_TOKEN"); v != "" {
-		token = v
-	}
-
-	return sp.NewClient(token), nil
+	return sp.NewClient(d.Get("token").(string)), nil
 }
