@@ -4,7 +4,7 @@ TFPLAN ?= plan.tfplan
 TEST?=$$(go list ./... |grep -v 'vendor')
 
 export CGO_ENABLED = 0
-export GOFLAGS=-mod = vendor
+export GOFLAGS = -mod=vendor
 export GO111MODULE = on
 
 all: plan
@@ -25,7 +25,7 @@ plan: init
 	terraform plan -out ${TFPLAN}
 
 acc:
-	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+	TF_ACC=1 go test $(TEST) -v -timeout 120m
 
 apply:
 	terraform apply ${TFPLAN}
