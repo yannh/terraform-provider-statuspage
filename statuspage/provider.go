@@ -12,11 +12,10 @@ import (
 func Provider() terraform.ResourceProvider {
 	return &schema.Provider{
 		ResourcesMap: map[string]*schema.Resource{
-			"statuspage_component":         resourceComponent(),
-			"statuspage_component_group":   resourceComponentGroup(),
-			"statuspage_metric":            resourceMetric(),
-			"statuspage_metrics_provider":  resourceMetricsProvider(),
-			"statuspage_incident_template": resourceIncidentTemplate(),
+			"statuspage_component":        resourceComponent(),
+			"statuspage_component_group":  resourceComponentGroup(),
+			"statuspage_metric":           resourceMetric(),
+			"statuspage_metrics_provider": resourceMetricsProvider(),
 		},
 		ConfigureFunc: providerConfigure,
 	}
