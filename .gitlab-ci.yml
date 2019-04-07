@@ -9,7 +9,6 @@ before_script:
   - mkdir -p /go/src/github.com/yannh
   - cp -r $CI_PROJECT_DIR /go/src/github.com/yannh/terraform-provider-statuspage
   - cd /go/src/github.com/yannh/terraform-provider-statuspage
-  - go get ./...
 
 test:
   stage: test
