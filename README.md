@@ -35,6 +35,7 @@ The following arguments are supported:
  * only_show_if_degraded (bool) - Requires a special feature flag to be enabled
  * showcase (bool) - Should this component be showcased
 
+
 ## statuspage_component_group
 
 Component groups provide a way to organize components. When a group is deleted, its child components will be orphaned. Note: A group cannot be empty, so if all the child components are deleted, the group will be deleted automatically. Another implication of this is that components must be created before their groups, when a group is created it will require a list of component IDs.
@@ -49,6 +50,16 @@ resource "statuspage_component_group" "my_group" {
     components  = ["${statuspage_component.my_component.id}"]
 }
 ```
+
+### Argument Reference
+
+The following arguments are supported:
+
+ * page_id - (Required) the id of the page this component belongs to
+ * components - (Required) List of component IDs
+ * name - (Required) name of the component group
+ * description - description of the component group
+
 
 ## statuspage_metrics
 
@@ -65,6 +76,23 @@ resource "statuspage_metric" "website_metrics" {
 }
 ```
 
+### Argument Reference
+
+The following arguments are supported:
+
+ * page_id - (Required) the id of the page this component belongs to
+ * name - Name of metric
+ * metric_identifier - The identifier used to look up the metric data from the provider
+ * transform - The transform to apply to metric before pulling into Statuspage. One of: "average", "count", "max", "min", or "sum"
+ * suffix - Suffix to describe the units on the graph
+ * y_axis_min - The lower bound of the y axis
+ * y_axis_max - The upper bound of the y axis
+ * y_axis_hidden - Should the values on the y axis be hidden on render
+ * display - Should the metric be displayed
+ * decimal_places - How many decimal places to render on the graph
+ * tooltip_description - A description for the tooltip
+
+
 ## statuspage_metrics_provider
 
 ### Example usage
@@ -79,10 +107,24 @@ resource "statuspage_metrics_provider" "statuspage_pingdom" {
 }
 ```
 
+### Argument Reference
+
+The following arguments are supported:
+
+ * page_id - (Required) the id of the page this component belongs to
+ * type - (Required) One of "Pingdom", "NewRelic", "Librato", "Datadog", or "Self"
+ * email - Required by the Librato and Pingdom type metrics providers.
+ * password - Required by the Pingdom-type metrics provider.
+ * api_key - Required by the Datadog and NewRelic type metrics providers.
+ * api_token - Required by the Librato and Datadog type metrics providers.
+ * application_key - Required by the Pingdom-type metrics provider.
+
+
 ## Requirements
 
 - [Terraform](https://www.terraform.io/downloads.html) 0.10.x
 - [Go](https://golang.org/doc/install) 1.11 (to build the provider plugin)
+
 
 ## Building The Provider
 
@@ -99,6 +141,7 @@ Enter the provider directory and build the provider
 $ cd $GOPATH/src/github.com/yannh/terraform-provider-statuspage
 $ make build
 ```
+
 
 ## Developing the Provider
 

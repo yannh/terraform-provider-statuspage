@@ -101,7 +101,7 @@ func resourceMetricsProvider() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"page_id": &schema.Schema{
 				Type:     schema.TypeString,
-				Optional: true,
+				Required: true,
 			},
 			"email": &schema.Schema{
 				Type:     schema.TypeString,
@@ -125,7 +125,7 @@ func resourceMetricsProvider() *schema.Resource {
 			},
 			"type": &schema.Schema{
 				Type:     schema.TypeString,
-				Optional: true,
+				Required: true,
 				ValidateFunc: validation.StringInSlice(
 					[]string{"Pingdom", "NewRelic", "Librato", "Datadog", "Self"},
 					false,
