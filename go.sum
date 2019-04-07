@@ -180,6 +180,14 @@ github.com/xiang90/probing v0.0.0-20160813154853-07dd2e8dfe18/go.mod h1:UETIi67q
 github.com/xlab/treeprint v0.0.0-20161029104018-1d6e34225557/go.mod h1:ce1O1j6UtZfjr22oyGxGLbauSBp2YVXpARAosm7dHBg=
 github.com/yannh/statuspage-go-sdk v0.0.0-20190407101038-4eb3e3189dd7 h1:IRvYWH4RUWunD+MzbVjjOj9V3zp2VC+rzZ75an9TLtk=
 github.com/yannh/statuspage-go-sdk v0.0.0-20190407101038-4eb3e3189dd7/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407105304-17e7a993e4d3 h1:xh/tkm8cfrtDsKFOqXHV7se1QB98+2FDRidxVMZ/4Sk=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407105304-17e7a993e4d3/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407111244-768c36df918d h1:H2WjmTigH3rmj2+ykYBuexQhwHSkjm/m5A6duSriWrw=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407111244-768c36df918d/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407111742-21bd653c9717 h1:MUQ5/PLJ1fh0duV6Vi2GoLSXT6b+hJMkf4VwMECRI6w=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407111742-21bd653c9717/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407113704-90a5ae2be08a h1:6sra6+kY/H7GYmt0vkjPk+CNITsO1mj6DcBrS4Xry6Q=
+github.com/yannh/statuspage-go-sdk v0.0.0-20190407113704-90a5ae2be08a/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
 github.com/zclconf/go-cty v0.0.0-20180302160414-49fa5e03c418 h1:uZKhc0PzQtIg+6+BqQU1m0zzcIgY2hHJk/Xwf00QUNw=
 github.com/zclconf/go-cty v0.0.0-20180302160414-49fa5e03c418/go.mod h1:LnDKxj8gN4aatfXUqmUNooaDjvmDcLPbAN3hYBIVoJE=
 golang.org/x/crypto v0.0.0-20180211211603-9de5f2eaf759 h1:6W75OzsrwJByqag5GxxtYVTVEyP+Sy+aLDUsJ9CD8OU=

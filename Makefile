@@ -29,3 +29,7 @@ acc:
 
 apply:
 	terraform apply ${TFPLAN}
+
+update-sdk:
+	go get -u github.com/yannh/statuspage-go-sdk
+	go mod vendor

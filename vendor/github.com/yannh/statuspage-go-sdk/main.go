@@ -91,7 +91,7 @@ func createResource(client IClient, pageID, resourceType string, resource, resul
 		return json.Unmarshal(bodyBytes, &result)
 	}
 
-	return fmt.Errorf("failed creating %s, request returned %d", resourceType, resp.StatusCode)
+	return fmt.Errorf("failed creating %s, request returned %d, full response: %+v", resourceType, resp.StatusCode, resp)
 }
 
 func readResource(client IClient, pageID, ID, resourceType string, target interface{}) error {
