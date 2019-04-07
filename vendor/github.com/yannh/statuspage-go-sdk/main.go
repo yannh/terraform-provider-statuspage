@@ -59,12 +59,12 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 	req.Header.Set("Authorization", "OAuth "+client.token)
 
 	maxRetries := 10
-	retryInterval := 5 * time.Second
+	retryInterval := 10 * time.Second
 
 	// Basic Retry logic around rate limiting
 	resp, err = client.httpClient.Do(req)
 	retries := 0
-	for retries = 1; resp != nil && resp.Status == "429" && retries <= maxRetries; retries = retries + 1 {
+	for retries = 1; resp != nil && resp.StatusCode == 420 && retries <= maxRetries; retries = retries + 1 {
 		time.Sleep(retryInterval)
 		resp, err = client.httpClient.Do(req)
 	}
