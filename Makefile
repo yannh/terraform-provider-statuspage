@@ -7,13 +7,13 @@ export CGO_ENABLED = 0
 all: plan
 
 vet:
-	go vet ./...
+	go vet $(TEST)
 
 test: vet
-	go test $(TEST)
+	go test -mod=vendor $(TEST)
 
 build:
-	go install -tags netgo -ldflags '-extldflags "-static"'
+	go install -mod=vendor -tags netgo -ldflags '-extldflags "-static"'
 
 init: test build
 	terraform init -plugin-dir $(GOPATH)bin
