@@ -2,7 +2,10 @@
 
 TFPLAN ?= plan.tfplan
 TEST?=$$(go list ./... |grep -v 'vendor')
+
 export CGO_ENABLED = 0
+export GOFLAGS=-mod = vendor
+export GO111MODULE = on
 
 all: plan
 
@@ -10,10 +13,10 @@ vet:
 	go vet $(TEST)
 
 test: vet
-	go test -mod=vendor $(TEST)
+	go test $(TEST)
 
 build:
-	go install -mod=vendor -tags netgo -ldflags '-extldflags "-static"'
+	go install -tags netgo -ldflags '-extldflags "-static"'
 
 init: test build
 	terraform init -plugin-dir $(GOPATH)bin
