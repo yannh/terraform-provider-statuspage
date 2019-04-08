@@ -100,32 +100,39 @@ func resourceMetricsProvider() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"page_id": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "The ID of the page this metric provider belongs to",
+				Required:    true,
 			},
 			"email": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "Required by the Librato and Pingdom type metrics providers",
+				Optional:    true,
 			},
 			"password": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "Required by the Pingdom-type metrics provider",
+				Optional:    true,
 			},
 			"api_key": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "Required by the Datadog and NewRelic type metrics providers",
+				Optional:    true,
 			},
 			"api_token": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "Required by the Librato and Datadog type metrics providers",
+				Optional:    true,
 			},
 			"application_key": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "Required by the Pingdom-type metrics provider",
+				Optional:    true,
 			},
 			"type": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "One of 'Pingdom', 'NewRelic', 'Librato', 'Datadog', or 'Self'",
+				Required:    true,
 				ValidateFunc: validation.StringInSlice(
 					[]string{"Pingdom", "NewRelic", "Librato", "Datadog", "Self"},
 					false,

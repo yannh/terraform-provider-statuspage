@@ -98,33 +98,40 @@ func resourceComponent() *schema.Resource {
 
 		Schema: map[string]*schema.Schema{
 			"page_id": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "the ID of the page this component belongs to",
+				Required:    true,
 			},
 			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Type:        schema.TypeString,
+				Description: "Display Name for the component",
+				Required:    true,
 			},
 			"description": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "More detailed description for the component",
+				Optional:    true,
 			},
 			"status": &schema.Schema{
-				Type:     schema.TypeString,
-				Optional: true,
+				Type:        schema.TypeString,
+				Description: "Status of component",
+				Optional:    true,
 				ValidateFunc: validation.StringInSlice(
 					[]string{"operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage", ""},
 					false,
 				),
+				Default: "operational",
 			},
 			"only_show_if_degraded": &schema.Schema{
-				Type:     schema.TypeBool,
-				Optional: true,
+				Type:        schema.TypeBool,
+				Description: "Requires a special feature flag to be enabled",
+				Optional:    true,
 			},
 			"showcase": &schema.Schema{
-				Type:     schema.TypeBool,
-				Optional: true,
-				Default:  true,
+				Type:        schema.TypeBool,
+				Description: "Should this component be showcased",
+				Optional:    true,
+				Default:     true,
 			},
 		},
 	}

@@ -1,10 +1,15 @@
-[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/terraform-provider-statuspage/commits/master)
+[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/redis-dump-go/commits/master)
 
 # Terraform Provider for Statuspage.io
 
 The Statuspage provider is used to interact with the resources supported by Statuspage.io.
-Authentication currently works by setting the environment variable STATUSPAGE_TOKEN
+Authentication currently works by setting the environment variable STATUSPAGE_TOKEN or by configuring the provider:
 
+```
+provider "statuspage" {
+  token = "YOURTOKEN"
+}
+```
 
 ## Download
 
