@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/redis-dump-go/commits/master)
+[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/terraform-provider-statuspage/commits/master)
 
 # Terraform Provider for Statuspage.io
 
