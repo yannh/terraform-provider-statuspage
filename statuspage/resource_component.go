@@ -53,6 +53,7 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("only_show_if_degraded", component.OnlyShowIfDegraded)
 	d.Set("status", component.Status)
 	d.Set("showcase", component.Showcase)
+	d.Set("automation_email", component.AutomationEmail)
 
 	return nil
 }
@@ -124,7 +125,7 @@ func resourceComponent() *schema.Resource {
 			},
 			"only_show_if_degraded": &schema.Schema{
 				Type:        schema.TypeBool,
-				Description: "Requires a special feature flag to be enabled",
+				Description: "Should this component be shown component only if in degraded state",
 				Optional:    true,
 			},
 			"showcase": &schema.Schema{
@@ -132,6 +133,11 @@ func resourceComponent() *schema.Resource {
 				Description: "Should this component be showcased",
 				Optional:    true,
 				Default:     true,
+			},
+			"automation_email": &schema.Schema{
+				Type:        schema.TypeString,
+				Description: "Email address to send automation events to",
+				Computed:    true,
 			},
 		},
 	}

@@ -19,7 +19,7 @@ build:
 	go install -tags netgo -ldflags '-extldflags "-static"'
 
 init: test build
-	terraform init -plugin-dir $(GOPATH)bin
+	terraform init -plugin-dir $(GOPATH)/bin
 
 plan: init
 	terraform plan -out ${TFPLAN}

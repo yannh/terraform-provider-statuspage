@@ -39,8 +39,12 @@ The following arguments are supported:
  * name - (Required) Name of the component
  * description - Description of the component
  * status - status of the component - must be one of "operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage" or ""
- * only_show_if_degraded (bool) - Requires a special feature flag to be enabled
+ * only_show_if_degraded (bool) - Should this component be shown component only if in degraded state
  * showcase (bool) - Should this component be showcased
+
+The following attributes are exported:
+
+ * automation_email - Email address to send automation events to
 
 
 ## statuspage_component_group
