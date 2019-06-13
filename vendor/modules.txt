@@ -160,7 +160,7 @@ github.com/ulikunitz/xz
 github.com/ulikunitz/xz/internal/xlog
 github.com/ulikunitz/xz/lzma
 github.com/ulikunitz/xz/internal/hash
-# github.com/yannh/statuspage-go-sdk v0.0.0-20190407113704-90a5ae2be08a
+# github.com/yannh/statuspage-go-sdk v0.0.0-20190612085850-4ec656b00f9e
 github.com/yannh/statuspage-go-sdk
 # github.com/zclconf/go-cty v0.0.0-20180302160414-49fa5e03c418
 github.com/zclconf/go-cty/cty

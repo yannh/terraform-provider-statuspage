@@ -11,10 +11,12 @@ type Component struct {
 
 type ComponentFull struct {
 	Component
-	ID        string `json:"id"`
-	PageID    string `json:"page_id"`
-	Position  int32  `json:"position"`
-	CreatedAt string `json:"created_at"`
+	ID              string `json:"id"`
+	PageID          string `json:"page_id"`
+	Position        int32  `json:"position"`
+	CreatedAt       string `json:"created_at"`
+	UpdatedAt       string `json:"updated_at"`
+	AutomationEmail string `json:"automation_email"`
 }
 
 func CreateComponent(client *Client, pageID string, component *Component) (*ComponentFull, error) {
