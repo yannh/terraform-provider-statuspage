@@ -3,3 +3,4 @@
 terraform.*
 .terraform
 crash.log
+.envrc
