@@ -50,10 +50,6 @@ func resourceMetricsProviderRead(d *schema.ResourceData, m interface{}) error {
 	log.Printf("[INFO] Statuspage read metrics provider: %s\n", mp.ID)
 
 	d.Set("email", mp.Email)
-	d.Set("password", mp.Password)
-	d.Set("api_key", mp.APIKey)
-	d.Set("api_token", mp.APIToken)
-	d.Set("application_key", mp.ApplicationKey)
 	d.Set("type", mp.Type)
 
 	return nil

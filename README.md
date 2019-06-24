@@ -167,8 +167,17 @@ $ $GOPATH/bin/terraform-provider-statuspage
 ...
 ```
 
-In order to test the provider, you can simply run `make test`.
+In order to test the provider, set the following variables:
 
 ```sh
-$ make test
+$ export STATUSPAGE_TOKEN=www
+$ export STATUSPAGE_PAGE=xxx
+$ export DATADOG_API_KEY=yyy
+$ export DATADOG_APPLICATION_KEY=zzz
+```
+
+, and then run `make test acc`.
+
+```sh
+$ make test acc
 ```
