@@ -2,6 +2,7 @@ package statuspage
 
 import (
 	"log"
+	"sort"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	sp "github.com/yannh/statuspage-go-sdk"
@@ -15,6 +16,7 @@ func resourceComponentGroupCreate(d *schema.ResourceData, m interface{}) error {
 	for _, c := range d.Get("components").([]interface{}) {
 		components = append(components, c.(string))
 	}
+	sort.Strings(components)
 
 	componentGroup, err := sp.CreateComponentGroup(
 		client,
@@ -55,6 +57,7 @@ func resourceComponentGroupRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", componentGroup.Name)
 	d.Set("description", componentGroup.Description)
+	sort.Strings(componentGroup.Components)
 	d.Set("components", componentGroup.Components)
 
 	return nil
@@ -64,10 +67,11 @@ func resourceComponentGroupUpdate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	componentGroupID := d.Id()
 
-	var components []string
+	var components sort.StringSlice
 	for _, c := range d.Get("components").([]interface{}) {
 		components = append(components, c.(string))
 	}
+	sort.Strings(components)
 
 	_, err := sp.UpdateComponentGroup(
 		client,
