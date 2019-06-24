@@ -25,10 +25,10 @@ type MetricsProviderFull struct {
 	YAxisMax           string `json:"y_axis_max"`
 	DecimalPlaces      string `json:"decimal_places"`
 	Disabled           bool   `json:"disabled"`
-	AccountID          bool   `json:"account_id"`
-	LastRevalidatedAt  bool   `json:"last_revalidated_at"`
-	CreatedAt          bool   `json:"created_at"`
-	UpdatedAt          bool   `json:"updated_at"`
+	AccountID          string `json:"account_id"`
+	LastRevalidatedAt  string `json:"last_revalidated_at"`
+	CreatedAt          string `json:"created_at"`
+	UpdatedAt          string `json:"updated_at"`
 }
 
 func (mp *MetricsProvider) validate() error {
@@ -58,8 +58,8 @@ func (mp *MetricsProvider) validate() error {
 		if mp.APIKey == "" {
 			return fmt.Errorf("parameter api_key is required for Datadog Metrics Provider")
 		}
-		if mp.APIToken == "" {
-			return fmt.Errorf("parameter api_token is required for Datadog Metrics Provider")
+		if mp.ApplicationKey == "" {
+			return fmt.Errorf("parameter application_key is required for Datadog Metrics Provider")
 		}
 	}
 

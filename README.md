@@ -127,8 +127,8 @@ The following arguments are supported:
  * email - Required by the Librato and Pingdom type metrics providers.
  * password - Required by the Pingdom-type metrics provider.
  * api_key - Required by the Datadog and NewRelic type metrics providers.
- * api_token - Required by the Librato and Datadog type metrics providers.
- * application_key - Required by the Pingdom-type metrics provider.
+ * api_token - Required by the Librato type metrics provider.
+ * application_key - Required by the Pingdom and Datadog type metrics providers.
 
 
 ## Requirements
