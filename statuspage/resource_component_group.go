@@ -16,7 +16,6 @@ func resourceComponentGroupCreate(d *schema.ResourceData, m interface{}) error {
 	for _, c := range d.Get("components").([]interface{}) {
 		components = append(components, c.(string))
 	}
-	sort.Strings(components)
 
 	componentGroup, err := sp.CreateComponentGroup(
 		client,
@@ -57,7 +56,6 @@ func resourceComponentGroupRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", componentGroup.Name)
 	d.Set("description", componentGroup.Description)
-	sort.Strings(componentGroup.Components)
 	d.Set("components", componentGroup.Components)
 
 	return nil
@@ -71,7 +69,6 @@ func resourceComponentGroupUpdate(d *schema.ResourceData, m interface{}) error {
 	for _, c := range d.Get("components").([]interface{}) {
 		components = append(components, c.(string))
 	}
-	sort.Strings(components)
 
 	_, err := sp.UpdateComponentGroup(
 		client,
@@ -113,7 +110,7 @@ func resourceComponentGroup() *schema.Resource {
 				Required:    true,
 			},
 			"components": &schema.Schema{
-				Type:        schema.TypeList,
+				Type:        schema.TypeSet,
 				Description: "An array with the IDs of the components in this group",
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
