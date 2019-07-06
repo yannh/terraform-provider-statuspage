@@ -19,11 +19,11 @@ func resourceMetricCreate(d *schema.ResourceData, m interface{}) error {
 			MetricIdentifier:   d.Get("metric_identifier").(string),
 			Transform:          d.Get("transform").(string),
 			Suffix:             d.Get("suffix").(string),
-			YAxisMin:           d.Get("y_axis_min").(int32),
-			YAxisMax:           d.Get("y_axis_max").(int32),
+			YAxisMin:           d.Get("y_axis_min").(int),
+			YAxisMax:           d.Get("y_axis_max").(int),
 			YAxisHidden:        d.Get("y_axis_hidden").(bool),
 			Display:            d.Get("display").(bool),
-			DecimalPlaces:      d.Get("decimal_places").(int32),
+			DecimalPlaces:      d.Get("decimal_places").(int),
 			TooltipDescription: d.Get("tooltip_description").(string),
 		},
 	)
@@ -81,11 +81,11 @@ func resourceMetricUpdate(d *schema.ResourceData, m interface{}) error {
 			MetricIdentifier:   d.Get("metric_identifier").(string),
 			Transform:          d.Get("transform").(string),
 			Suffix:             d.Get("suffix").(string),
-			YAxisMin:           d.Get("y_axis_min").(int32),
-			YAxisMax:           d.Get("y_axis_max").(int32),
+			YAxisMin:           d.Get("y_axis_min").(int),
+			YAxisMax:           d.Get("y_axis_max").(int),
 			YAxisHidden:        d.Get("y_axis_hidden").(bool),
 			Display:            d.Get("display").(bool),
-			DecimalPlaces:      d.Get("decimal_places").(int32),
+			DecimalPlaces:      d.Get("decimal_places").(int),
 			TooltipDescription: d.Get("tooltip_description").(string),
 		},
 	)
@@ -125,7 +125,7 @@ func resourceMetric() *schema.Resource {
 			},
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
-				Description: "Display name for the metric provider",
+				Description: "Display name for the metric",
 				Optional:    true,
 			},
 			"metric_identifier": &schema.Schema{

@@ -73,9 +73,13 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 }
 
 func createResource(client IClient, pageID, resourceType string, resource, result interface{}) error {
+	return createResourceCustomURL(client, "/pages/"+pageID+"/"+resourceType+"s", resource, result)
+}
+
+func createResourceCustomURL(client IClient, URL string, resource, result interface{}) error {
 	resp, err := client.doHTTPRequest(
 		"POST",
-		"/pages/"+pageID+"/"+resourceType+"s",
+		URL,
 		resource,
 	)
 	if err != nil {
@@ -91,7 +95,7 @@ func createResource(client IClient, pageID, resourceType string, resource, resul
 		return json.Unmarshal(bodyBytes, &result)
 	}
 
-	return fmt.Errorf("failed creating %s, request returned %d, full response: %+v", resourceType, resp.StatusCode, resp)
+	return fmt.Errorf("failed creating resource, request returned %d, full response: %+v", resp.StatusCode, resp)
 }
 
 func readResource(client IClient, pageID, ID, resourceType string, target interface{}) error {
