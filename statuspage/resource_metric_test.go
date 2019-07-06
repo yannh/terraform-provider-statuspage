@@ -8,13 +8,13 @@ import (
 	"github.com/hashicorp/terraform/helper/resource"
 )
 
-func TestAccStatuspageMetricProvider_Basic(t *testing.T) {
+func TestAccStatuspageMetric_Basic(t *testing.T) {
 	resource.Test(t, resource.TestCase{
 		PreCheck:  func() { testAccPreCheck(t) },
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccMetricProvider_basic(),
+				Config: testAccMetric_basic(),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("statuspage_metrics_provider.datadog", "id"),
 					resource.TestCheckResourceAttr("statuspage_metrics_provider.datadog", "type", "Datadog"),
@@ -24,7 +24,7 @@ func TestAccStatuspageMetricProvider_Basic(t *testing.T) {
 	})
 }
 
-func testAccMetricProvider_basic() string {
+func testAccMetric_basic() string {
 	return fmt.Sprintf(`
 	variable "pageid" {
 		default = "%s"
