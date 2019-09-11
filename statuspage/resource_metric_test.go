@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"os"
 	"testing"
-
-	"github.com/hashicorp/terraform/helper/resource"
+	//"github.com/hashicorp/terraform/helper/resource"
 )
 
 func TestAccStatuspageMetric_Basic(t *testing.T) {
