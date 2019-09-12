@@ -136,9 +136,9 @@ func resourceMetric() *schema.Resource {
 			"transform": &schema.Schema{
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The transform to apply to metric before pulling into Statuspage. One of: 'average', 'count', 'max', 'min', or 'sum'",
+				Description: "The transform to apply to metric before pulling into Statuspage. One of: 'average', 'count', 'max', 'min', 'sum', 'response_time' or 'uptime'",
 				ValidateFunc: validation.StringInSlice(
-					[]string{"average", "count", "max", "min", "sum"},
+					[]string{"average", "count", "max", "min", "sum", "response_time", "uptime"},
 					false,
 				),
 			},
