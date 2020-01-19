@@ -220,7 +220,7 @@ github.com/ulikunitz/xz/internal/hash
 # github.com/vmihailenco/msgpack v4.0.1+incompatible
 github.com/vmihailenco/msgpack
 github.com/vmihailenco/msgpack/codes
-# github.com/yannh/statuspage-go-sdk v0.0.0-20200119125611-5b7a545f86b9
+# github.com/yannh/statuspage-go-sdk v0.0.0-20190706125613-73f6fed15b1a
 github.com/yannh/statuspage-go-sdk
 # github.com/zclconf/go-cty v1.0.0
 github.com/zclconf/go-cty/cty
