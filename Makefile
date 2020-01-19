@@ -13,7 +13,7 @@ vet:
 	go vet $(TEST)
 
 test: vet
-	go test -v $(TEST)
+	go test $(TEST)
 
 build:
 	go install -tags netgo -ldflags '-extldflags "-static"'
@@ -31,5 +31,5 @@ apply:
 	terraform apply ${TFPLAN}
 
 update-sdk:
-	GOFLAGS=  go get -u github.com/yannh/statuspage-go-sdk
+	go get -u github.com/yannh/statuspage-go-sdk
 	go mod vendor
