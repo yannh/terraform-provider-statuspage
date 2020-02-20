@@ -16,12 +16,15 @@ func resourceComponentGroupCreate(d *schema.ResourceData, m interface{}) error {
 		components[i] = tfComponent.(string)
 	}
 
+	name := d.Get("name").(string)
+	description := d.Get("description").(string)
+
 	componentGroup, err := sp.CreateComponentGroup(
 		client,
 		d.Get("page_id").(string),
 		&sp.ComponentGroup{
-			Name:        d.Get("name").(string),
-			Description: d.Get("description").(string),
+			Name:        &name,
+			Description: &description,
 			Components:  components,
 		},
 	)
@@ -31,8 +34,8 @@ func resourceComponentGroupCreate(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created component group: %s\n", componentGroup.ID)
-	d.SetId(componentGroup.ID)
+	log.Printf("[INFO] Statuspage Created component group: %s\n", *componentGroup.ID)
+	d.SetId(*componentGroup.ID)
 
 	return resourceComponentGroupRead(d, m)
 }
@@ -51,7 +54,7 @@ func resourceComponentGroupRead(d *schema.ResourceData, m interface{}) error {
 		return nil
 	}
 
-	log.Printf("[INFO] Statuspage read component group: %s\n", componentGroup.ID)
+	log.Printf("[INFO] Statuspage read component group: %s\n", *componentGroup.ID)
 
 	d.Set("name", componentGroup.Name)
 	d.Set("description", componentGroup.Description)
@@ -70,13 +73,16 @@ func resourceComponentGroupUpdate(d *schema.ResourceData, m interface{}) error {
 		components[i] = tfComponent.(string)
 	}
 
+	name := d.Get("name").(string)
+	description := d.Get("description").(string)
+
 	_, err := sp.UpdateComponentGroup(
 		client,
 		d.Get("page_id").(string),
 		componentGroupID,
 		&sp.ComponentGroup{
-			Name:        d.Get("name").(string),
-			Description: d.Get("description").(string),
+			Name:        &name,
+			Description: &description,
 			Components:  components,
 		},
 	)

@@ -1,20 +1,20 @@
-package statuspagesdk
+package statuspage
 
 type IncidentTemplate struct {
-	Name         string   `json:"name"`
-	GroupID      string   `json:"group_id"`
-	UpdateStatus string   `json:"update_status"`
-	Title        string   `json:"suffix"`
-	Body         string   `json:"y_axis_min"`
+	Name         *string  `json:"name"`
+	GroupID      *string  `json:"group_id"`
+	UpdateStatus *string  `json:"update_status"`
+	Title        *string  `json:"suffix"`
+	Body         *string  `json:"y_axis_min"`
 	ComponentIDs []string `json:"component_ids"`
-	ShouldTweet  bool     `json:"should_tweet"`
+	ShouldTweet  *bool    `json:"should_tweet"`
 }
 
 type IncidentTemplateFull struct {
 	IncidentTemplate
-	ID        string `json:"id"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	ID        *string `json:"id"`
+	CreatedAt *string `json:"created_at"`
+	UpdatedAt *string `json:"updated_at"`
 }
 
 func CreateIncidentTemplate(client *Client, pageID string, incidentTemplate *IncidentTemplate) (*IncidentTemplateFull, error) {

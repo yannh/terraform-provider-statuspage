@@ -10,21 +10,32 @@ import (
 
 func resourceMetricCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
+	name := d.Get("name").(string)
+	metricIdentifier := d.Get("metric_identifier").(string)
+	transform := d.Get("transform").(string)
+	suffix := d.Get("suffix").(string)
+	yAxisMin := d.Get("y_axis_min").(float64)
+	yAxisMax := d.Get("y_axis_max").(float64)
+	yAxisHidden := d.Get("y_axis_hidden").(bool)
+	display := d.Get("display").(bool)
+	decimalPlaces := d.Get("decimal_places").(int)
+	tooltipDescription := d.Get("tooltip_description").(string)
+
 	metric, err := sp.CreateMetric(
 		client,
 		d.Get("page_id").(string),
 		d.Get("metrics_provider_id").(string),
 		&sp.Metric{
-			Name:               d.Get("name").(string),
-			MetricIdentifier:   d.Get("metric_identifier").(string),
-			Transform:          d.Get("transform").(string),
-			Suffix:             d.Get("suffix").(string),
-			YAxisMin:           d.Get("y_axis_min").(float64),
-			YAxisMax:           d.Get("y_axis_max").(float64),
-			YAxisHidden:        d.Get("y_axis_hidden").(bool),
-			Display:            d.Get("display").(bool),
-			DecimalPlaces:      d.Get("decimal_places").(int),
-			TooltipDescription: d.Get("tooltip_description").(string),
+			Name:               &name,
+			MetricIdentifier:   &metricIdentifier,
+			Transform:          &transform,
+			Suffix:             &suffix,
+			YAxisMin:           &yAxisMin,
+			YAxisMax:           &yAxisMax,
+			YAxisHidden:        &yAxisHidden,
+			Display:            &display,
+			DecimalPlaces:      &decimalPlaces,
+			TooltipDescription: &tooltipDescription,
 		},
 	)
 	if err != nil {
@@ -32,8 +43,8 @@ func resourceMetricCreate(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created metric: %s\n", metric.ID)
-	d.SetId(metric.ID)
+	log.Printf("[INFO] Statuspage Created metric: %s\n", *metric.ID)
+	d.SetId(*metric.ID)
 
 	return resourceMetricRead(d, m)
 }
@@ -52,18 +63,18 @@ func resourceMetricRead(d *schema.ResourceData, m interface{}) error {
 		return nil
 	}
 
-	log.Printf("[INFO] Statuspage read metric: %s\n", metric.ID)
+	log.Printf("[INFO] Statuspage read metric: %s\n", *metric.ID)
 
-	d.Set("name", metric.Name)
-	d.Set("metric_identifier", metric.MetricIdentifier)
-	d.Set("transform", metric.Transform)
-	d.Set("suffix", metric.Suffix)
-	d.Set("y_axis_min", metric.YAxisMin)
-	d.Set("y_axis_max", metric.YAxisMax)
-	d.Set("y_axis_hidden", metric.YAxisHidden)
-	d.Set("display", metric.Display)
-	d.Set("decimal_places", metric.DecimalPlaces)
-	d.Set("tooltip_description", metric.TooltipDescription)
+	d.Set("name", *metric.Name)
+	d.Set("metric_identifier", *metric.MetricIdentifier)
+	d.Set("transform", *metric.Transform)
+	d.Set("suffix", *metric.Suffix)
+	d.Set("y_axis_min", *metric.YAxisMin)
+	d.Set("y_axis_max", *metric.YAxisMax)
+	d.Set("y_axis_hidden", *metric.YAxisHidden)
+	d.Set("display", *metric.Display)
+	d.Set("decimal_places", *metric.DecimalPlaces)
+	d.Set("tooltip_description", *metric.TooltipDescription)
 
 	return nil
 }
@@ -72,21 +83,32 @@ func resourceMetricUpdate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	metricID := d.Id()
 
+	name := d.Get("name").(string)
+	metricIdentifier := d.Get("metric_identifier").(string)
+	transform := d.Get("transform").(string)
+	suffix := d.Get("suffix").(string)
+	yAxisMin := d.Get("y_axis_min").(float64)
+	yAxisMax := d.Get("y_axis_max").(float64)
+	yAxisHidden := d.Get("y_axis_hidden").(bool)
+	display := d.Get("display").(bool)
+	decimalPlaces := d.Get("decimal_places").(int)
+	tooltipDescription := d.Get("tooltip_description").(string)
+
 	_, err := sp.UpdateMetric(
 		client,
 		d.Get("page_id").(string),
 		metricID,
 		&sp.Metric{
-			Name:               d.Get("name").(string),
-			MetricIdentifier:   d.Get("metric_identifier").(string),
-			Transform:          d.Get("transform").(string),
-			Suffix:             d.Get("suffix").(string),
-			YAxisMin:           d.Get("y_axis_min").(float64),
-			YAxisMax:           d.Get("y_axis_max").(float64),
-			YAxisHidden:        d.Get("y_axis_hidden").(bool),
-			Display:            d.Get("display").(bool),
-			DecimalPlaces:      d.Get("decimal_places").(int),
-			TooltipDescription: d.Get("tooltip_description").(string),
+			Name:               &name,
+			MetricIdentifier:   &metricIdentifier,
+			Transform:          &transform,
+			Suffix:             &suffix,
+			YAxisMin:           &yAxisMin,
+			YAxisMax:           &yAxisMax,
+			YAxisHidden:        &yAxisHidden,
+			Display:            &display,
+			DecimalPlaces:      &decimalPlaces,
+			TooltipDescription: &tooltipDescription,
 		},
 	)
 	if err != nil {

@@ -1,4 +1,4 @@
-package statuspagesdk
+package statuspage
 
 import (
 	"bytes"

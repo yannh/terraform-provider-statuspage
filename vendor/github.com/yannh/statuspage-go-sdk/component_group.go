@@ -1,18 +1,18 @@
-package statuspagesdk
+package statuspage
 
 type ComponentGroup struct {
-	Name        string   `json:"name"`
-	Description string   `json:"description,omitempty"`
+	Name        *string  `json:"name"`
+	Description *string  `json:"description,omitempty"`
 	Components  []string `json:"components,omitempty"`
 }
 
 type ComponentGroupFull struct {
 	ComponentGroup
-	ID        string `json:"id"`
-	PageID    string `json:"page_id"`
-	Position  int32  `json:"position"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	ID        *string `json:"id"`
+	PageID    *string `json:"page_id"`
+	Position  *int32  `json:"position"`
+	CreatedAt *string `json:"created_at"`
+	UpdatedAt *string `json:"updated_at"`
 }
 
 func CreateComponentGroup(client *Client, pageID string, componentGroup *ComponentGroup) (*ComponentGroupFull, error) {

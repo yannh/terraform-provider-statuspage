@@ -437,6 +437,10 @@ github.com/yannh/statuspage-go-sdk v0.0.0-20190624204702-87ae28fc2aea h1:Rpxj8T4
 github.com/yannh/statuspage-go-sdk v0.0.0-20190624204702-87ae28fc2aea/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
 github.com/yannh/statuspage-go-sdk v0.0.0-20190624205410-42bb5e91407e h1:1R73TgF+hV88OLbqFEjG+ghdNZV36RXTrCZvgyAc+vk=
 github.com/yannh/statuspage-go-sdk v0.0.0-20190624205410-42bb5e91407e/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
+github.com/yannh/statuspage-go-sdk v0.0.0-20200119125611-5b7a545f86b9 h1:OdSvDR/tnHE7deoT2epr2XXLFqx1fFCRYmWlTNGCs3c=
+github.com/yannh/statuspage-go-sdk v0.0.0-20200119125611-5b7a545f86b9/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
+github.com/yannh/statuspage-go-sdk v0.0.0-20200220200934-6575d444fe39 h1:cHFjuuP3BrkFWHyP1Eh6/Zh/9F0heeJV3GWExJfTalk=
+github.com/yannh/statuspage-go-sdk v0.0.0-20200220200934-6575d444fe39/go.mod h1:ACDB9LZMy4Iju+kPn5P/4OlwQsYBbVlfA7b3xaNO7mg=
 github.com/yannh/statuspage-go-sdk v0.0.0-20190706125613-73f6fed15b1a h1:bXZB4X4IigSR6n9I153YJtagxgQ5+W23pO/EAeooWQ0=
 github.com/yannh/statuspage-go-sdk v0.0.0-20190706125613-73f6fed15b1a/go.mod h1:1eOg/zU3fBvdmiL2x4ILiUZCIqPVZ82fQTtX1iSUU1A=
 github.com/yannh/statuspage-go-sdk v0.0.0-20200119125611-5b7a545f86b9 h1:OdSvDR/tnHE7deoT2epr2XXLFqx1fFCRYmWlTNGCs3c=
