@@ -2,7 +2,6 @@ package statuspage
 
 import (
 	"log"
-	"sort"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	sp "github.com/yannh/statuspage-go-sdk"
@@ -11,12 +10,11 @@ import (
 func resourceComponentGroupCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 
-	// convert []interface{} to []string
-	var components []string
-	for _, c := range d.Get("components").([]interface{}) {
-		components = append(components, c.(string))
+	tfComponents := d.Get("components").(*schema.Set).List()
+	components := make([]string, len(tfComponents))
+	for i, tfComponent := range tfComponents {
+		components[i] = tfComponent.(string)
 	}
-	sort.Strings(components)
 
 	name := d.Get("name").(string)
 	description := d.Get("description").(string)
@@ -60,7 +58,6 @@ func resourceComponentGroupRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", componentGroup.Name)
 	d.Set("description", componentGroup.Description)
-	sort.Strings(componentGroup.Components)
 	d.Set("components", componentGroup.Components)
 
 	return nil
@@ -70,11 +67,11 @@ func resourceComponentGroupUpdate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	componentGroupID := d.Id()
 
-	var components sort.StringSlice
-	for _, c := range d.Get("components").([]interface{}) {
-		components = append(components, c.(string))
+	tfComponents := d.Get("components").(*schema.Set).List()
+	components := make([]string, len(tfComponents))
+	for i, tfComponent := range tfComponents {
+		components[i] = tfComponent.(string)
 	}
-	sort.Strings(components)
 
 	name := d.Get("name").(string)
 	description := d.Get("description").(string)
@@ -119,12 +116,11 @@ func resourceComponentGroup() *schema.Resource {
 				Required:    true,
 			},
 			"components": &schema.Schema{
-				Type:        schema.TypeList,
+				Type:        schema.TypeSet,
 				Description: "An array with the IDs of the components in this group",
-				Elem: &schema.Schema{
-					Type: schema.TypeString,
-				},
-				Required: true,
+				Elem:        &schema.Schema{Type: schema.TypeString},
+				Set:         schema.HashString,
+				Required:    true,
 			},
 			"name": &schema.Schema{
 				Type:        schema.TypeString,

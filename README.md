@@ -80,10 +80,10 @@ System metrics are a great way to build trust and transparency around your organ
 
 ```
 resource "statuspage_metric" "website_metrics" {
-    page_id            = "pageid"
-    metric_provider_id = "${statuspage_metrics_provider.statuspage_pingdom.id}"
-    name               = "My Website"
-    metric_identifier  = "pingdom_check_id"
+    page_id             = "pageid"
+    metrics_provider_id = "${statuspage_metrics_provider.statuspage_pingdom.id}"
+    name                = "My Website"
+    metric_identifier   = "pingdom_check_id"
 }
 ```
 
@@ -143,7 +143,7 @@ Clone repository to: `$GOPATH/src/github.com/yannh/terraform-provider-statuspage
 
 ```sh
 $ mkdir -p $GOPATH/src/github.com/yannh; cd $GOPATH/src/github.com/yannh
-$ git clone git@github.com:yannh/terraform-provider-statuspage
+$ git clone https://github.com/yannh/terraform-provider-statuspage.git
 ```
 
 Enter the provider directory and build the provider

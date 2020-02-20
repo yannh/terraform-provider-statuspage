@@ -147,7 +147,7 @@ func resourceMetric() *schema.Resource {
 			},
 			"name": &schema.Schema{
 				Type:        schema.TypeString,
-				Description: "Display name for the metric provider",
+				Description: "Display name for the metric",
 				Optional:    true,
 			},
 			"metric_identifier": &schema.Schema{
@@ -170,12 +170,12 @@ func resourceMetric() *schema.Resource {
 				Optional:    true,
 			},
 			"y_axis_min": &schema.Schema{
-				Type:        schema.TypeInt,
+				Type:        schema.TypeFloat,
 				Description: "The lower bound of the y axis",
 				Optional:    true,
 			},
 			"y_axis_max": &schema.Schema{
-				Type:        schema.TypeInt,
+				Type:        schema.TypeFloat,
 				Description: "The upper bound of the y axis",
 				Optional:    true,
 			},
