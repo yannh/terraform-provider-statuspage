@@ -34,7 +34,7 @@ func resourceComponentGroupCreate(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created component group: %s\n", componentGroup.ID)
+	log.Printf("[INFO] Statuspage Created component group: %s\n", *componentGroup.ID)
 	d.SetId(*componentGroup.ID)
 
 	return resourceComponentGroupRead(d, m)
@@ -54,7 +54,7 @@ func resourceComponentGroupRead(d *schema.ResourceData, m interface{}) error {
 		return nil
 	}
 
-	log.Printf("[INFO] Statuspage read component group: %s\n", componentGroup.ID)
+	log.Printf("[INFO] Statuspage read component group: %s\n", *componentGroup.ID)
 
 	d.Set("name", componentGroup.Name)
 	d.Set("description", componentGroup.Description)

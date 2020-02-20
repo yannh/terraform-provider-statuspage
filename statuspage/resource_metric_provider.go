@@ -34,7 +34,7 @@ func resourceMetricsProviderCreate(d *schema.ResourceData, m interface{}) error 
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created metrics provider: %s\n", mp.ID)
+	log.Printf("[INFO] Statuspage Created metrics provider: %s\n", *mp.ID)
 	d.SetId(*mp.ID)
 
 	return resourceMetricsProviderRead(d, m)
@@ -54,7 +54,7 @@ func resourceMetricsProviderRead(d *schema.ResourceData, m interface{}) error {
 		return nil
 	}
 
-	log.Printf("[INFO] Statuspage read metrics provider: %s\n", mp.ID)
+	log.Printf("[INFO] Statuspage read metrics provider: %s\n", *mp.ID)
 
 	d.Set("email", mp.Email)
 	d.Set("type", mp.Type)

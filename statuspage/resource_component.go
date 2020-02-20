@@ -36,7 +36,7 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created: %s\n", component.ID)
+	log.Printf("[INFO] Statuspage Created: %s\n", *component.ID)
 	d.SetId(*component.ID)
 
 	return resourceComponentRead(d, m)
@@ -56,7 +56,7 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 		return nil
 	}
 
-	log.Printf("[INFO] Statuspage read: %s\n", component.ID)
+	log.Printf("[INFO] Statuspage read: %s\n", *component.ID)
 
 	d.Set("name", component.Name)
 	d.Set("description", component.Description)

@@ -43,7 +43,7 @@ func resourceMetricCreate(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	log.Printf("[INFO] Statuspage Created metric: %s\n", metric.ID)
+	log.Printf("[INFO] Statuspage Created metric: %s\n", *metric.ID)
 	d.SetId(*metric.ID)
 
 	return resourceMetricRead(d, m)
@@ -63,7 +63,7 @@ func resourceMetricRead(d *schema.ResourceData, m interface{}) error {
 		return nil
 	}
 
-	log.Printf("[INFO] Statuspage read metric: %s\n", metric.ID)
+	log.Printf("[INFO] Statuspage read metric: %s\n", *metric.ID)
 
 	d.Set("name", *metric.Name)
 	d.Set("metric_identifier", *metric.MetricIdentifier)
