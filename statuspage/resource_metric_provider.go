@@ -10,16 +10,23 @@ import (
 
 func resourceMetricsProviderCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
+	email := d.Get("email").(string)
+	password := d.Get("password").(string)
+	aPIKey := d.Get("api_key").(string)
+	aPIToken := d.Get("api_token").(string)
+	applicationKey := d.Get("application_key").(string)
+	t := d.Get("type").(string)
+
 	mp, err := sp.CreateMetricsProvider(
 		client,
 		d.Get("page_id").(string),
 		&sp.MetricsProvider{
-			Email:          d.Get("email").(string),
-			Password:       d.Get("password").(string),
-			APIKey:         d.Get("api_key").(string),
-			APIToken:       d.Get("api_token").(string),
-			ApplicationKey: d.Get("application_key").(string),
-			Type:           d.Get("type").(string),
+			Email:          &email,
+			Password:       &password,
+			APIKey:         &aPIKey,
+			APIToken:       &aPIToken,
+			ApplicationKey: &applicationKey,
+			Type:           &t,
 		},
 	)
 	if err != nil {
@@ -28,7 +35,7 @@ func resourceMetricsProviderCreate(d *schema.ResourceData, m interface{}) error 
 	}
 
 	log.Printf("[INFO] Statuspage Created metrics provider: %s\n", mp.ID)
-	d.SetId(mp.ID)
+	d.SetId(*mp.ID)
 
 	return resourceMetricsProviderRead(d, m)
 }
@@ -59,17 +66,24 @@ func resourceMetricsProviderUpdate(d *schema.ResourceData, m interface{}) error 
 	client := m.(*sp.Client)
 	metricsProviderID := d.Id()
 
+	email := d.Get("email").(string)
+	password := d.Get("password").(string)
+	aPIKey := d.Get("api_key").(string)
+	aPIToken := d.Get("api_token").(string)
+	applicationKey := d.Get("application_key").(string)
+	t := d.Get("type").(string)
+
 	_, err := sp.UpdateMetricsProvider(
 		client,
 		d.Get("page_id").(string),
 		metricsProviderID,
 		&sp.MetricsProvider{
-			Email:          d.Get("email").(string),
-			Password:       d.Get("password").(string),
-			APIKey:         d.Get("api_key").(string),
-			APIToken:       d.Get("api_token").(string),
-			ApplicationKey: d.Get("application_key").(string),
-			Type:           d.Get("type").(string),
+			Email:          &email,
+			Password:       &password,
+			APIKey:         &aPIKey,
+			APIToken:       &aPIToken,
+			ApplicationKey: &applicationKey,
+			Type:           &t,
 		},
 	)
 	if err != nil {

@@ -1,22 +1,22 @@
-package statuspagesdk
+package statuspage
 
 type Component struct {
-	Name               string `json:"name"`
-	Description        string `json:"description,omitempty"`
-	GroupID            string `json:"group_id,omitempty"`
-	Showcase           bool   `json:"showcase,omitempty"`
-	Status             string `json:"status,omitempty"`
-	OnlyShowIfDegraded bool   `json:"only_show_if_degraded,omitempty"`
+	Name               *string `json:"name"`
+	Description        *string `json:"description,omitempty"`
+	GroupID            *string `json:"group_id,omitempty"`
+	Showcase           *bool   `json:"showcase,omitempty"`
+	Status             *string `json:"status,omitempty"`
+	OnlyShowIfDegraded *bool   `json:"only_show_if_degraded,omitempty"`
 }
 
 type ComponentFull struct {
 	Component
-	ID              string `json:"id"`
-	PageID          string `json:"page_id"`
-	Position        int32  `json:"position"`
-	CreatedAt       string `json:"created_at"`
-	UpdatedAt       string `json:"updated_at"`
-	AutomationEmail string `json:"automation_email"`
+	ID              *string `json:"id"`
+	PageID          *string `json:"page_id"`
+	Position        *int32  `json:"position"`
+	CreatedAt       *string `json:"created_at"`
+	UpdatedAt       *string `json:"updated_at"`
+	AutomationEmail *string `json:"automation_email"`
 }
 
 func CreateComponent(client *Client, pageID string, component *Component) (*ComponentFull, error) {

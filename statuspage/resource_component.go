@@ -8,16 +8,27 @@ import (
 	sp "github.com/yannh/statuspage-go-sdk"
 )
 
+func s(s string) *string {
+	return &s
+}
+
 func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
+
+	name := d.Get("name").(string)
+	description := d.Get("description").(string)
+	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
+	status := d.Get("status").(string)
+	showcase := d.Get("showcase").(bool)
+
 	component, err := sp.CreateComponent(
 		client, d.Get("page_id").(string),
 		&sp.Component{
-			Name:               d.Get("name").(string),
-			Description:        d.Get("description").(string),
-			OnlyShowIfDegraded: d.Get("only_show_if_degraded").(bool),
-			Status:             d.Get("status").(string),
-			Showcase:           d.Get("showcase").(bool),
+			Name:               &name,
+			Description:        &description,
+			OnlyShowIfDegraded: &onlyShowIfDegraded,
+			Status:             &status,
+			Showcase:           &showcase,
 		},
 	)
 	if err != nil {
@@ -26,7 +37,7 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	}
 
 	log.Printf("[INFO] Statuspage Created: %s\n", component.ID)
-	d.SetId(component.ID)
+	d.SetId(*component.ID)
 
 	return resourceComponentRead(d, m)
 }
@@ -62,16 +73,22 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	componentID := d.Id()
 
+	name := d.Get("name").(string)
+	description := d.Get("description").(string)
+	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
+	status := d.Get("status").(string)
+	showcase := d.Get("showcase").(bool)
+
 	_, err := sp.UpdateComponent(
 		client,
 		d.Get("page_id").(string),
 		componentID,
 		&sp.Component{
-			Name:               d.Get("name").(string),
-			Description:        d.Get("description").(string),
-			OnlyShowIfDegraded: d.Get("only_show_if_degraded").(bool),
-			Status:             d.Get("status").(string),
-			Showcase:           d.Get("showcase").(bool),
+			Name:               &name,
+			Description:        &description,
+			OnlyShowIfDegraded: &onlyShowIfDegraded,
+			Status:             &status,
+			Showcase:           &showcase,
 		},
 	)
 	if err != nil {
