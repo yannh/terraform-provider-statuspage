@@ -20,6 +20,7 @@ func TestAccStatuspageComponent_Basic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "operational"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "true"),
 				),
 			},
 			{
@@ -28,6 +29,7 @@ func TestAccStatuspageComponent_Basic(t *testing.T) {
 					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
 				),
 			},
 		},
@@ -49,6 +51,7 @@ func testAccComponent_basic(rand int) string {
 		name = "${var.name}"
 		description = "test component"
 		status = "operational"
+		showcase = true
 	}
 	`, rand, pageID)
 }
@@ -68,6 +71,7 @@ func testAccComponent_update(rand int) string {
 		name = "${var.name}"
 		description = "updated component"
 		status = "major_outage"
+		showcase = false
 	}
 	`, rand, pageID)
 }
