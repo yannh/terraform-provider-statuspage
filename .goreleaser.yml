@@ -1,0 +1,9 @@
+builds:
+- id: terraform-provider-statuspage
+  binary: terraform-provider-statuspage
+  env:
+  - CGO_ENABLED=0
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
