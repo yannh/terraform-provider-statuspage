@@ -1,0 +1,15 @@
+name: build
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: test
+        run: make acc
+
+      - name: build
+        run: make docker-build-static
