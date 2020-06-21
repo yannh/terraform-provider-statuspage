@@ -2,7 +2,7 @@
 
 TFPLAN ?= plan.tfplan
 TEST?=$$(go list ./... |grep -v 'vendor')
-GOIMAGE ?= golang:1.14
+GOIMAGE ?= golang:1.14.4
 
 export CGO_ENABLED = 0
 export GOFLAGS = -mod=vendor
@@ -22,7 +22,7 @@ docker-test:
 	docker run -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make test
 
 build-static:
-	go build -tags netgo -ldflags '-extldflags "-static"' -a -o bin/terraform-provider-statuspage
+	go build -trimpath -tags netgo -ldflags '-extldflags "-static"' -a -o bin/terraform-provider-statuspage
 
 docker-build-static:
 	docker run -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make build-static

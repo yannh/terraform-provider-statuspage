@@ -11,11 +11,6 @@ provider "statuspage" {
 }
 ```
 
-## Download
-
-You can download the [latest build from Gitlab](https://gitlab.com/yannhamon/terraform-provider-statuspage/-/jobs/artifacts/master/download?job=build)
-
-
 ## statuspage_component
 
 Components are the individual pieces of infrastructure that are listed on your status page.
