@@ -1,4 +1,4 @@
-[![Build status](https://github.com/yannh/terraform-provider-statuspage/workflows/build/badge.svg?branch=master)](https://github.com/yannh/terraform-provider-statuspage/actions?query=branch%3Amaster) [![Go Report card](https://goreportcard.com/badge/github.com/yannh/terraform-provider-statuspage)](https://goreportcard.com/report/github.com/yannh/terraform-provider-statuspage)
+![test](https://github.com/yannh/terraform-provider-statuspage/workflows/test/badge.svg) [![Go Report card](https://goreportcard.com/badge/github.com/yannh/terraform-provider-statuspage)](https://goreportcard.com/report/github.com/yannh/terraform-provider-statuspage)
 
 # Terraform Provider for Statuspage.io
 
