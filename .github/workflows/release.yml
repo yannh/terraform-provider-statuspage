@@ -1,8 +1,8 @@
 name: release
 on:
   push:
-    branches:
-      - refs/tags/*
+    tags:
+      - *
 jobs:
   goreleaser:
     runs-on: ubuntu-latest
