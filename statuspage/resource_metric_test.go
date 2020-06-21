@@ -4,23 +4,23 @@ import (
 	"fmt"
 	"os"
 	"testing"
-//	"github.com/hashicorp/terraform/helper/resource"
+	//	"github.com/hashicorp/terraform/helper/resource"
 )
 
 func TestAccStatuspageMetric_Basic(t *testing.T) {
-//	resource.Test(t, resource.TestCase{
-//		PreCheck:  func() { testAccPreCheck(t) },
-//		Providers: testAccProviders,
-//		Steps: []resource.TestStep{
-//			{
-//				Config: testAccMetric_basic(),
-//				Check: resource.ComposeTestCheckFunc(
-//					resource.TestCheckResourceAttrSet("statuspage_metrics_provider.datadog", "id"),
-//					resource.TestCheckResourceAttr("statuspage_metrics_provider.datadog", "type", "Datadog"),
-//				),
-//			},
-//		},
-//	})
+	//	resource.Test(t, resource.TestCase{
+	//		PreCheck:  func() { testAccPreCheck(t) },
+	//		Providers: testAccProviders,
+	//		Steps: []resource.TestStep{
+	//			{
+	//				Config: testAccMetric_basic(),
+	//				Check: resource.ComposeTestCheckFunc(
+	//					resource.TestCheckResourceAttrSet("statuspage_metrics_provider.datadog", "id"),
+	//					resource.TestCheckResourceAttr("statuspage_metrics_provider.datadog", "type", "Datadog"),
+	//				),
+	//			},
+	//		},
+	//	})
 }
 
 func testAccMetric_basic() string {
