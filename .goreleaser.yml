@@ -9,7 +9,7 @@ builds:
       - darwin
     flags:
       - -trimpath
-      - -tags netgo
+      - -tags=netgo
       - -a
     ldflags:
       - -extldflags "-static"
