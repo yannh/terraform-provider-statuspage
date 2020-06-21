@@ -135,27 +135,27 @@ func resourceMetric() *schema.Resource {
 		Delete: resourceMetricDelete,
 
 		Schema: map[string]*schema.Schema{
-			"page_id": &schema.Schema{
+			"page_id": {
 				Type:        schema.TypeString,
 				Description: "The ID of the page this metric belongs to",
 				Required:    true,
 			},
-			"metrics_provider_id": &schema.Schema{
+			"metrics_provider_id": {
 				Type:        schema.TypeString,
 				Description: "ID of the metric provider",
 				Required:    true,
 			},
-			"name": &schema.Schema{
+			"name": {
 				Type:        schema.TypeString,
 				Description: "Display name for the metric",
 				Optional:    true,
 			},
-			"metric_identifier": &schema.Schema{
+			"metric_identifier": {
 				Type:        schema.TypeString,
 				Description: "The identifier used to look up the metric data from the provider",
 				Optional:    true,
 			},
-			"transform": &schema.Schema{
+			"transform": {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Description: "The transform to apply to metric before pulling into Statuspage. One of: 'average', 'count', 'max', 'min', or 'sum'",
@@ -164,37 +164,37 @@ func resourceMetric() *schema.Resource {
 					false,
 				),
 			},
-			"suffix": &schema.Schema{
+			"suffix": {
 				Type:        schema.TypeString,
 				Description: "Suffix to describe the units on the graph",
 				Optional:    true,
 			},
-			"y_axis_min": &schema.Schema{
+			"y_axis_min": {
 				Type:        schema.TypeFloat,
 				Description: "The lower bound of the y axis",
 				Optional:    true,
 			},
-			"y_axis_max": &schema.Schema{
+			"y_axis_max": {
 				Type:        schema.TypeFloat,
 				Description: "The upper bound of the y axis",
 				Optional:    true,
 			},
-			"y_axis_hidden": &schema.Schema{
+			"y_axis_hidden": {
 				Type:        schema.TypeBool,
 				Description: "Should the values on the y axis be hidden on render",
 				Optional:    true,
 			},
-			"display": &schema.Schema{
+			"display": {
 				Type:        schema.TypeBool,
 				Description: "Should the metric be displayed",
 				Optional:    true,
 			},
-			"decimal_places": &schema.Schema{
+			"decimal_places": {
 				Type:        schema.TypeInt,
 				Description: "How many decimal places to render on the graph",
 				Optional:    true,
 			},
-			"tooltip_description": &schema.Schema{
+			"tooltip_description": {
 				Type:        schema.TypeString,
 				Description: "Tooltip for the metric",
 				Optional:    true,

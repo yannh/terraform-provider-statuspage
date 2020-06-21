@@ -5,4 +5,4 @@ require (
 	github.com/yannh/statuspage-go-sdk v0.0.0-20200220200934-6575d444fe39
 )
 
-go 1.13
+go 1.14

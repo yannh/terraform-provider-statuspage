@@ -8,14 +8,14 @@ import (
 	"github.com/hashicorp/terraform/helper/resource"
 )
 
-func TestAccStatuspageComponentGroup_Basic(t *testing.T) {
+func TestAccStatuspageComponentGroupBasic(t *testing.T) {
 	rid := acctest.RandIntRange(1000, 9999)
 	resource.Test(t, resource.TestCase{
 		PreCheck:  func() { testAccPreCheck(t) },
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config: testAccComponentGroup_basic(rid),
+				Config: testAccComponentGroupBasic(rid),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("statuspage_component_group.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component_group.default", "description", "Acc. Tests"),
@@ -23,7 +23,7 @@ func TestAccStatuspageComponentGroup_Basic(t *testing.T) {
 				),
 			},
 			{
-				Config: testAccComponentGroup_update(rid),
+				Config: testAccComponentGroupUpdate(rid),
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("statuspage_component_group.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component_group.default", "description", "Acc. Tests"),
@@ -34,7 +34,7 @@ func TestAccStatuspageComponentGroup_Basic(t *testing.T) {
 	})
 }
 
-func testAccComponentGroup_basic(rand int) string {
+func testAccComponentGroupBasic(rand int) string {
 	return fmt.Sprintf(`
 	variable "component_name" {
 		default = "tf-testacc-component-group-%d"
@@ -60,7 +60,7 @@ func testAccComponentGroup_basic(rand int) string {
 	`, rand, pageID)
 }
 
-func testAccComponentGroup_update(rand int) string {
+func testAccComponentGroupUpdate(rand int) string {
 	return fmt.Sprintf(`
 	variable "component_name" {
 		default = "tf-testacc-component-group-%d"

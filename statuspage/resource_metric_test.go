@@ -7,7 +7,7 @@ import (
 	//	"github.com/hashicorp/terraform/helper/resource"
 )
 
-func TestAccStatuspageMetric_Basic(t *testing.T) {
+func TestAccStatuspageMetricBasic(t *testing.T) {
 	//	resource.Test(t, resource.TestCase{
 	//		PreCheck:  func() { testAccPreCheck(t) },
 	//		Providers: testAccProviders,
@@ -23,7 +23,7 @@ func TestAccStatuspageMetric_Basic(t *testing.T) {
 	//	})
 }
 
-func testAccMetric_basic() string {
+func testAccMetricBasic() string {
 	return fmt.Sprintf(`
 	variable "pageid" {
 		default = "%s"
