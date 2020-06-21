@@ -7,11 +7,11 @@ builds:
       - windows
       - linux
       - darwin
-  - flags:
+    flags:
       - -trimpath
       - -tags netgo
       - -a
-  - ldflags:
+    ldflags:
       - -extldflags "-static"
 archives:
   - format: tar.gz
