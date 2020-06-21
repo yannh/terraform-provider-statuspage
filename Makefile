@@ -45,3 +45,6 @@ apply:
 update-sdk:
 	GOFLAGS=  go get -u github.com/yannh/statuspage-go-sdk
 	go mod vendor
+
+release:
+	docker run -e GITHUB_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v0.138 goreleaser
