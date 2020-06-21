@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/terraform-provider-statuspage/commits/master)
+[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/terraform-provider-statuspage/commits/master) [![Go Report card](https://goreportcard.com/badge/github.com/yannh/terraform-provider-statuspage)](https://goreportcard.com/report/github.com/yannh/terraform-provider-statuspage)
 
 # Terraform Provider for Statuspage.io
 
