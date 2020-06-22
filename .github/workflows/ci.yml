@@ -1,4 +1,4 @@
-name: test
+name: ci
 on:
   push:
 jobs:
@@ -15,3 +15,19 @@ jobs:
           DATADOG_APPLICATION_KEY: ${{ secrets.DATADOG_APPLICATION_KEY }}
           STATUSPAGE_PAGE: ${{ secrets.STATUSPAGE_PAGE }}
           STATUSPAGE_TOKEN: ${{ secrets.STATUSPAGE_TOKEN }}
+
+  goreleaser:
+    runs-on: ubuntu-latest
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Unshallow
+        run: git fetch --prune --unshallow
+
+      - name: Run GoReleaser
+        run: make release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
