@@ -15,6 +15,7 @@ func resourceMetricsProviderCreate(d *schema.ResourceData, m interface{}) error 
 	aPIKey := d.Get("api_key").(string)
 	aPIToken := d.Get("api_token").(string)
 	applicationKey := d.Get("application_key").(string)
+	baseUri := d.Get("metric_base_uri").(string)
 	t := d.Get("type").(string)
 
 	mp, err := sp.CreateMetricsProvider(
@@ -26,6 +27,7 @@ func resourceMetricsProviderCreate(d *schema.ResourceData, m interface{}) error 
 			APIKey:         &aPIKey,
 			APIToken:       &aPIToken,
 			ApplicationKey: &applicationKey,
+			MetricBaseUri:  &baseUri,
 			Type:           &t,
 		},
 	)
@@ -71,6 +73,7 @@ func resourceMetricsProviderUpdate(d *schema.ResourceData, m interface{}) error 
 	aPIKey := d.Get("api_key").(string)
 	aPIToken := d.Get("api_token").(string)
 	applicationKey := d.Get("application_key").(string)
+	baseUri := d.Get("metric_base_uri").(string)
 	t := d.Get("type").(string)
 
 	_, err := sp.UpdateMetricsProvider(
@@ -83,6 +86,7 @@ func resourceMetricsProviderUpdate(d *schema.ResourceData, m interface{}) error 
 			APIKey:         &aPIKey,
 			APIToken:       &aPIToken,
 			ApplicationKey: &applicationKey,
+			MetricBaseUri:  &baseUri,
 			Type:           &t,
 		},
 	)
@@ -147,6 +151,11 @@ func resourceMetricsProvider() *schema.Resource {
 					[]string{"Pingdom", "NewRelic", "Librato", "Datadog", "Self"},
 					false,
 				),
+			},
+			"metric_base_uri": &schema.Schema{
+				Type:        schema.TypeString,
+				Description: "Required by the NewRelic-type metrics provider",
+				Optional:    true,
 			},
 		},
 	}
