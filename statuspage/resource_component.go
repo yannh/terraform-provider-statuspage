@@ -1,7 +1,9 @@
 package statuspage
 
 import (
+	"fmt"
 	"log"
+	"strings"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/helper/validation"
@@ -107,12 +109,30 @@ func resourceComponentDelete(d *schema.ResourceData, m interface{}) error {
 	return sp.DeleteComponent(client, d.Get("page_id").(string), d.Id())
 }
 
+func resourceComponentImport(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
+	if len(strings.Split(d.Id(), "/")) != 2 {
+		return []*schema.ResourceData{}, fmt.Errorf("[ERROR] Invalid resource format: %s. Please use 'page-id/component-id'", d.Id())
+	}
+	pageID := strings.Split(d.Id(), "/")[0]
+	componentID := strings.Split(d.Id(), "/")[1]
+	log.Printf("[INFO] Importing Component %s from Page %s", componentID, pageID)
+
+	d.Set("page_id", pageID)
+	d.SetId(componentID)
+	err := resourceComponentRead(d, m)
+
+	return []*schema.ResourceData{d}, err
+}
+
 func resourceComponent() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceComponentCreate,
 		Read:   resourceComponentRead,
 		Update: resourceComponentUpdate,
 		Delete: resourceComponentDelete,
+		Importer: &schema.ResourceImporter{
+			State: resourceComponentImport,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"page_id": &schema.Schema{
