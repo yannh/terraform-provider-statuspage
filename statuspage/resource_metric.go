@@ -67,7 +67,11 @@ func resourceMetricRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", *metric.Name)
 	d.Set("metric_identifier", *metric.MetricIdentifier)
-	d.Set("transform", *metric.Transform)
+	if metric.Transform != nil {
+		// statuspage.io api does not return transform for GET metric operations
+		// See https://developer.statuspage.io/#operation/getPagesPageIdMetricsMetricId
+		d.Set("transform", *metric.Transform)
+	}
 	d.Set("suffix", *metric.Suffix)
 	d.Set("y_axis_min", *metric.YAxisMin)
 	d.Set("y_axis_max", *metric.YAxisMax)
@@ -158,9 +162,9 @@ func resourceMetric() *schema.Resource {
 			"transform": {
 				Type:        schema.TypeString,
 				Optional:    true,
-				Description: "The transform to apply to metric before pulling into Statuspage. One of: 'average', 'count', 'max', 'min', or 'sum'",
+				Description: "The transform to apply to metric before pulling into Statuspage. One of: 'average', 'count', 'max', 'min', 'sum', 'response_time' or 'uptime'",
 				ValidateFunc: validation.StringInSlice(
-					[]string{"average", "count", "max", "min", "sum"},
+					[]string{"average", "count", "max", "min", "sum", "response_time", "uptime"},
 					false,
 				),
 			},
