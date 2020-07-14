@@ -10,6 +10,7 @@ type MetricsProvider struct {
 	APIKey         *string `json:"api_key,omitempty"`
 	APIToken       *string `json:"api_token,omitempty"`
 	ApplicationKey *string `json:"application_key,omitempty"`
+	MetricBaseUri  *string `json:"metric_base_uri,omitempty"`
 	Type           *string `json:"type,omitempty"`
 }
 
@@ -46,6 +47,9 @@ func (mp *MetricsProvider) validate() error {
 	case "NewRelic":
 		if *mp.APIKey == "" {
 			return fmt.Errorf("parameter api_key is required for NewRelic Metrics Provider")
+		}
+		if *mp.MetricBaseUri == "" {
+			return fmt.Errorf("parameter metric_base_uri is required for NewRelic Metrics Provider")
 		}
 	case "Librato":
 		if *mp.Email == "" {

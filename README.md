@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.com/yannhamon/terraform-provider-statuspage/badges/master/pipeline.svg)](https://gitlab.com/yannhamon/terraform-provider-statuspage/commits/master)
+![test](https://github.com/yannh/terraform-provider-statuspage/workflows/test/badge.svg) [![Go Report card](https://goreportcard.com/badge/github.com/yannh/terraform-provider-statuspage)](https://goreportcard.com/report/github.com/yannh/terraform-provider-statuspage)
 
 # Terraform Provider for Statuspage.io
 
@@ -10,11 +10,6 @@ provider "statuspage" {
   token = "YOURTOKEN"
 }
 ```
-
-## Download
-
-You can download the [latest build from Gitlab](https://gitlab.com/yannhamon/terraform-provider-statuspage/-/jobs/artifacts/master/download?job=build)
-
 
 ## statuspage_component
 
@@ -104,7 +99,7 @@ The following arguments are supported:
  * page_id - (Required) the id of the page this component belongs to
  * name - Name of metric
  * metric_identifier - The identifier used to look up the metric data from the provider
- * transform - The transform to apply to metric before pulling into Statuspage. One of: "average", "count", "max", "min", or "sum"
+ * transform - The transform to apply to metric before pulling into Statuspage. One of: "average", "count", "max", "min", "sum", "response_time", "uptime". For pingdom metrics_provider allowed values are "response_time" and "uptime".
  * suffix - Suffix to describe the units on the graph
  * y_axis_min - The lower bound of the y axis
  * y_axis_max - The upper bound of the y axis

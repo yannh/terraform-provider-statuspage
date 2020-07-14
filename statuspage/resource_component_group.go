@@ -130,24 +130,24 @@ func resourceComponentGroup() *schema.Resource {
 		},
 
 		Schema: map[string]*schema.Schema{
-			"page_id": &schema.Schema{
+			"page_id": {
 				Type:        schema.TypeString,
 				Description: "the ID of the page this component group belongs to",
 				Required:    true,
 			},
-			"components": &schema.Schema{
+			"components": {
 				Type:        schema.TypeSet,
 				Description: "An array with the IDs of the components in this group",
 				Elem:        &schema.Schema{Type: schema.TypeString},
 				Set:         schema.HashString,
 				Required:    true,
 			},
-			"name": &schema.Schema{
+			"name": {
 				Type:        schema.TypeString,
 				Description: "Display name for this component group",
 				Required:    true,
 			},
-			"description": &schema.Schema{
+			"description": {
 				Type:        schema.TypeString,
 				Description: "More detailed description for this component group",
 				Optional:    true,
