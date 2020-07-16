@@ -36,6 +36,32 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 	})
 }
 
+func TestAccStatuspageComponent_BasicImport(t *testing.T) {
+	rid := acctest.RandIntRange(1000, 9999)
+
+	pageID = fmt.Sprintf("page-id-%d", rid)
+	componentID := rid
+
+	resourceName := "statuspage_component.default"
+	importInput := fmt.Sprintf("%s/%d", pageID, componentID)
+
+	resource.Test(t, resource.TestCase{
+		PreCheck:  func() { testAccPreCheck(t) },
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccComponentBasic(rid),
+			},
+			{
+				ResourceName:      resourceName,
+				ImportStateId:     importInput,
+				ImportState:       true,
+				ImportStateVerify: true,
+			},
+		},
+	})
+}
+
 func testAccComponentBasic(rand int) string {
 	return fmt.Sprintf(`
 	variable "name" {
