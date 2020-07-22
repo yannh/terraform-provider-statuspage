@@ -1,7 +1,9 @@
 package statuspage
 
 import (
+	"fmt"
 	"log"
+	"strings"
 
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/helper/validation"
@@ -131,12 +133,30 @@ func resourceMetricDelete(d *schema.ResourceData, m interface{}) error {
 	return sp.DeleteMetric(client, d.Get("page_id").(string), d.Id())
 }
 
+func resourceMetricImport(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
+	if len(strings.Split(d.Id(), "/")) != 2 {
+		return []*schema.ResourceData{}, fmt.Errorf("[ERROR] Invalid resource format: %s. Please use 'page-id/metric-id'", d.Id())
+	}
+	pageID := strings.Split(d.Id(), "/")[0]
+	metricID := strings.Split(d.Id(), "/")[1]
+	log.Printf("[INFO] Importing Metric %s from Page %s", metricID, pageID)
+
+	d.Set("page_id", pageID)
+	d.SetId(metricID)
+	err := resourceMetricRead(d, m)
+
+	return []*schema.ResourceData{d}, err
+}
+
 func resourceMetric() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceMetricCreate,
 		Read:   resourceMetricRead,
 		Update: resourceMetricUpdate,
 		Delete: resourceMetricDelete,
+		Importer: &schema.ResourceImporter{
+			State: resourceMetricImport,
+		},
 
 		Schema: map[string]*schema.Schema{
 			"page_id": {
