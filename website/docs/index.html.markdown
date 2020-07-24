@@ -1,0 +1,33 @@
+---
+layout: "statuspage"
+page_title: "Provider: Statuspage"
+sidebar_current: "docs-statuspage-index"
+description: |-
+  Terraform provider Statuspage.
+---
+
+# Statuspage Provider
+
+The Statuspage provider is used to interact with the resources supported by Statuspage.io.
+
+
+
+Use the navigation to the left to read about the available resources.
+
+## Example Usage
+
+Authentication currently works by setting the environment variable STATUSPAGE_TOKEN or by configuring the provider
+ 
+```hcl
+provider "statuspage" {
+  token = "YOURTOKEN"
+}
+
+# Example resource configuration
+resource "statuspage_component" "my_component" {
+     page_id     = "pageid"
+     name        = "My Website"
+     description = "Status of my website"
+     status      = "operational"
+ }
+```
