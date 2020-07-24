@@ -41,6 +41,11 @@ The following attributes are exported:
 
  * automation_email - Email address to send automation events to
 
+### Import Example Usage
+
+```sh
+terraform import statuspage_component.my_component my-page-id/my-component-id
+```
 
 ## statuspage_component_group
 
@@ -66,6 +71,11 @@ The following arguments are supported:
  * name - (Required) name of the component group
  * description - description of the component group
 
+### Import Example Usage
+
+```sh
+terraform import statuspage_component_group.my_group my-page-id/my-component-group-id
+```
 
 ## statuspage_metrics
 
@@ -98,6 +108,11 @@ The following arguments are supported:
  * decimal_places - How many decimal places to render on the graph
  * tooltip_description - A description for the tooltip
 
+### Import Example Usage
+
+```sh
+terraform import statuspage_metric.website_metrics my-page-id/my-metric-id
+```
 
 ## statuspage_metrics_provider
 
@@ -125,6 +140,11 @@ The following arguments are supported:
  * api_token - Required by the Librato type metrics provider.
  * application_key - Required by the Pingdom and Datadog type metrics providers.
 
+### Import Example Usage
+
+```sh
+terraform import statuspage_metrics_provider.statuspage_pingdom my-page-id/my-metrics-provider-id
+```
 
 ## Requirements
 

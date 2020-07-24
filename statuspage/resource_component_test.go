@@ -6,6 +6,7 @@ import (
 
 	"github.com/hashicorp/terraform/helper/acctest"
 	"github.com/hashicorp/terraform/helper/resource"
+	"github.com/hashicorp/terraform/terraform"
 )
 
 func TestAccStatuspageComponentBasic(t *testing.T) {
@@ -31,6 +32,33 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
 				),
+			},
+		},
+	})
+}
+
+func TestAccStatuspageComponent_BasicImport(t *testing.T) {
+	rid := acctest.RandIntRange(1000, 9999)
+
+	resource.Test(t, resource.TestCase{
+		PreCheck:  func() { testAccPreCheck(t) },
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccComponentBasic(rid),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
+				),
+			},
+			{
+				ResourceName:      "statuspage_component.default",
+				ImportState:       true,
+				ImportStateVerify: true,
+				ImportStateIdFunc: func(ts *terraform.State) (string, error) {
+					rs := ts.RootModule().Resources["statuspage_component.default"]
+					return fmt.Sprintf("%s/%s", pageID, rs.Primary.ID), nil
+				},
 			},
 		},
 	})
