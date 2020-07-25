@@ -25,13 +25,15 @@ resource "statuspage_component_group" "my_group" {
 
 The following arguments are supported:
 
- * page_id - (Required) the id of the page this component belongs to
- * components - (Required) List of component IDs
- * name - (Required) name of the component group
- * description - description of the component group
+ * `page_id` - (Required) the id of the page this component belongs to
+ * `components` - (Required) List of component IDs
+ * `name` - (Required) name of the component group
+ * `description` - description of the component group
 
-## Import Example Usage
+## Import
+
+statuspage_component_group can be imported using the ID of the component group, e.g.
 
 ```sh
-terraform import statuspage_component_group.my_group my-page-id/my-component-group-id
+$ terraform import statuspage_component_group.my_group my-page-id/my-component-group-id
 ```
