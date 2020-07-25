@@ -14,8 +14,12 @@ Use the navigation to the left to read about the available resources.
 
 ## Example Usage
 
-Authentication currently works by setting the environment variable STATUSPAGE_TOKEN, or by configuring the provider
- 
+Authentication currently works by setting the environment variable `STATUSPAGE_TOKEN`, or by configuring the provider:
+
+!> **Warning:** Hard-coding credentials into any Terraform configuration is not
+recommended, and risks secret leakage should this file ever be committed to a
+public version control system.
+
 ```hcl
 provider "statuspage" {
   token = "YOURTOKEN"

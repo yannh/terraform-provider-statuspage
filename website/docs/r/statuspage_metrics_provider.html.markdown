@@ -27,7 +27,7 @@ resource "statuspage_metrics_provider" "statuspage_pingdom" {
 The following arguments are supported:
 
  * `page_id` - (Required) the id of the page this component belongs to
- * `type` - (Required) One of "Pingdom", "NewRelic", "Librato", "Datadog", or "Self"
+ * `type` - (Required) One of `Pingdom`, `NewRelic`, `Librato`, `Datadog`, or `Self`
  * `email` - Required by the Librato and Pingdom type metrics providers.
  * `password` - Required by the Pingdom-type metrics provider.
  * `api_key` - Required by the Datadog and NewRelic type metrics providers.
@@ -36,7 +36,7 @@ The following arguments are supported:
 
 ## Import
 
-statuspage_metrics_provider can be imported using the ID of the metrics provider, e.g.
+`statuspage_metrics_provider` can be imported using the ID of the metrics provider, e.g.
 
 ```sh
 $ terraform import statuspage_metrics_provider.statuspage_pingdom my-page-id/my-metrics-provider-id

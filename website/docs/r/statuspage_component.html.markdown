@@ -28,17 +28,17 @@ The following arguments are supported:
  * `page_id` - (Required) the id of the page this component belongs to
  * `name` - (Required) Name of the component
  * `description` - Description of the component
- * `status` - status of the component - must be one of "operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage" or ""
+ * `status` - status of the component - must be one of `operational`, `under_maintenance`, `degraded_performance`, `partial_outage`, `major_outage` or ` `
  * `only_show_if_degraded` (bool) - Should this component be shown component only if in degraded state
  * `showcase` (bool) - Should this component be showcased
 
 The following attributes are exported:
 
- * automation_email - Email address to send automation events to
+ * `automation_email` - Email address to send automation events to
 
 ## Import
 
-statuspage_component can be imported using the ID of the component, e.g.
+`statuspage_component` can be imported using the ID of the component, e.g.
 
 ```sh
 $ terraform import statuspage_component.my_component my-page-id/my-component-id

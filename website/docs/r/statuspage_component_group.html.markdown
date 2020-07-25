@@ -32,7 +32,7 @@ The following arguments are supported:
 
 ## Import
 
-statuspage_component_group can be imported using the ID of the component group, e.g.
+`statuspage_component_group` can be imported using the ID of the component group, e.g.
 
 ```sh
 $ terraform import statuspage_component_group.my_group my-page-id/my-component-group-id
