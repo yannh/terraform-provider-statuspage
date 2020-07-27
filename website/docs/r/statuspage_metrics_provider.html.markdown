@@ -15,9 +15,7 @@ Statuspage metrics provider in the Terraform provider Statuspage.
 ```hcl
 resource "statuspage_metrics_provider" "statuspage_pingdom" {
     page_id         = "pageid"
-    email           = "myemail@provider.com"
-    password        = "pingdom_password"
-    application_key = "pingdomAppKey"
+    api_token       = "a-pingdom-api-token"
     type            = "Pingdom"
 }
 ```
@@ -31,7 +29,7 @@ The following arguments are supported:
  * `email` - Required by the Librato and Pingdom type metrics providers.
  * `password` - Required by the Pingdom-type metrics provider.
  * `api_key` - Required by the Datadog and NewRelic type metrics providers.
- * `api_token` - Required by the Librato type metrics provider.
+ * `api_token` - Required by the Librato and Pingdom-type metrics provider.
  * `application_key` - Required by the Pingdom and Datadog type metrics providers.
 
 ## Import
