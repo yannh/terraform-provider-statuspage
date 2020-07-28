@@ -147,21 +147,25 @@ func resourceMetricsProvider() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "Required by the Pingdom-type metrics provider",
 				Optional:    true,
+				Sensitive:   true,
 			},
 			"api_key": {
 				Type:        schema.TypeString,
 				Description: "Required by the Datadog and NewRelic type metrics providers",
 				Optional:    true,
+				Sensitive:   true,
 			},
 			"api_token": {
 				Type:        schema.TypeString,
 				Description: "Required by the Librato and Datadog type metrics providers",
 				Optional:    true,
+				Sensitive:   true,
 			},
 			"application_key": {
 				Type:        schema.TypeString,
 				Description: "Required by the Pingdom-type metrics provider",
 				Optional:    true,
+				Sensitive:   true,
 			},
 			"type": {
 				Type:        schema.TypeString,
