@@ -157,7 +157,7 @@ func resourceMetricsProvider() *schema.Resource {
 			},
 			"api_token": {
 				Type:        schema.TypeString,
-				Description: "Required by the Librato and Datadog type metrics providers",
+				Description: "Required by the Librato, Pingdom and Datadog type metrics providers",
 				Optional:    true,
 				Sensitive:   true,
 			},
