@@ -35,14 +35,16 @@ type MetricsProviderFull struct {
 func (mp *MetricsProvider) validate() error {
 	switch *mp.Type {
 	case "Pingdom":
-		if *mp.Email == "" {
-			return fmt.Errorf("parameter email is required for Pingdom Metrics Provider")
-		}
-		if *mp.Password == "" {
-			return fmt.Errorf("parameter password is required for Pingdom Metrics Provider")
-		}
-		if *mp.ApplicationKey == "" {
-			return fmt.Errorf("parameter application_key is required for Pingdom Metrics Provider")
+		if *mp.APIToken == "" {
+			if *mp.ApplicationKey == "" {
+				return fmt.Errorf("parameter application_key is required for Pingdom Metrics Provider")
+			}
+			if *mp.Password == "" {
+				return fmt.Errorf("parameter password is required for Pingdom Metrics Provider")
+			}
+			if *mp.Email == "" {
+				return fmt.Errorf("parameter email is required for Pingdom Metrics Provider")
+			}
 		}
 	case "NewRelic":
 		if *mp.APIKey == "" {
