@@ -21,7 +21,7 @@ test: vet
 docker-test:
 	docker run -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make test
 
-build-static:
+build build-static:
 	go build -trimpath -tags netgo -ldflags '-extldflags "-static"' -a -o bin/terraform-provider-statuspage
 
 docker-build-static:
