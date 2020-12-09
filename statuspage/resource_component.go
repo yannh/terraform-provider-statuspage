@@ -29,7 +29,7 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 			Name:               &name,
 			Description:        &description,
 			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
+			Status:             status,
 			Showcase:           &showcase,
 		},
 	)
@@ -89,7 +89,7 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 			Name:               &name,
 			Description:        &description,
 			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
+			Status:             status,
 			Showcase:           &showcase,
 		},
 	)
@@ -158,7 +158,12 @@ func resourceComponent() *schema.Resource {
 					[]string{"operational", "under_maintenance", "degraded_performance", "partial_outage", "major_outage", ""},
 					false,
 				),
-				Default: "operational",
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					if new == "" || old == new {
+						return true
+					}
+					return false
+				},
 			},
 			"only_show_if_degraded": {
 				Type:        schema.TypeBool,

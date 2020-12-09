@@ -5,7 +5,7 @@ type Component struct {
 	Description        *string `json:"description,omitempty"`
 	GroupID            *string `json:"group_id,omitempty"`
 	Showcase           *bool   `json:"showcase,omitempty"`
-	Status             *string `json:"status,omitempty"`
+	Status             string  `json:"status,omitempty"`
 	OnlyShowIfDegraded *bool   `json:"only_show_if_degraded,omitempty"`
 }
 
