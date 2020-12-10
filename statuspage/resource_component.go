@@ -94,7 +94,7 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 		},
 	)
 	if err != nil {
-		log.Printf("[WARN] Statuspage Failed creating component: %s\n", err)
+		log.Printf("[WARN] Statuspage Failed updating component: %s\n", err)
 		return err
 	}
 
