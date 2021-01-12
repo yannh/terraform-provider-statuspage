@@ -163,6 +163,7 @@ func resourceMetric() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "The ID of the page this metric belongs to",
 				Required:    true,
+				ForceNew:    true,
 			},
 			"metrics_provider_id": {
 				Type:        schema.TypeString,

@@ -105,8 +105,9 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 
 func resourceComponentDelete(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
+	pageID := d.Get("page_id").(string)
 
-	return sp.DeleteComponent(client, d.Get("page_id").(string), d.Id())
+	return sp.DeleteComponent(client, pageID, d.Id())
 }
 
 func resourceComponentImport(d *schema.ResourceData, m interface{}) ([]*schema.ResourceData, error) {
@@ -139,6 +140,7 @@ func resourceComponent() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "the ID of the page this component belongs to",
 				Required:    true,
+				ForceNew:    true,
 			},
 			"name": {
 				Type:        schema.TypeString,
