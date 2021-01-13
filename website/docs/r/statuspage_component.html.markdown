@@ -21,6 +21,23 @@ resource "statuspage_component" "my_component" {
 }
 ```
 
+To use the Statuspage console instead of Terraform to manage the status
+of the component:
+
+```hcl
+resource "statuspage_component" "my_component" {
+    page_id     = "pageid"
+    name        = "My Website"
+    description = "Status of my website"
+    status      = "operational"
+    lifecycle {
+        ignore_changes = [
+            status,
+        ]
+    }
+}
+```
+
 ## Argument Reference
 
 The following arguments are supported:
