@@ -51,7 +51,8 @@ In order to test the provider, set the following variables:
 
 ```sh
 $ export STATUSPAGE_TOKEN=www
-$ export STATUSPAGE_PAGE=xxx
+$ export STATUSPAGE_PAGE=xxx    # PageID of the Statuspage page
+$ export STATUSPAGE_PAGE_2=xxx  # PageID of another Statuspage page
 $ export DATADOG_API_KEY=yyy
 $ export DATADOG_APPLICATION_KEY=zzz
 ```

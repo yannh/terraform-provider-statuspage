@@ -37,7 +37,7 @@ acc:
 	TF_ACC=1 go test $(TEST) -v -timeout 120m
 
 docker-acc:
-	docker run -e DATADOG_API_KEY -e DATADOG_APPLICATION_KEY -e STATUSPAGE_PAGE -e STATUSPAGE_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make acc
+	docker run -e DATADOG_API_KEY -e DATADOG_APPLICATION_KEY -e STATUSPAGE_PAGE -e STATUSPAGE_PAGE_2 -e STATUSPAGE_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make acc
 
 apply:
 	terraform apply ${TFPLAN}

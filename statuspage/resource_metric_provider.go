@@ -137,6 +137,7 @@ func resourceMetricsProvider() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "The ID of the page this metric provider belongs to",
 				Required:    true,
+				ForceNew:    true,
 			},
 			"email": {
 				Type:        schema.TypeString,

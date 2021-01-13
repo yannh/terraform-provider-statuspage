@@ -134,6 +134,7 @@ func resourceComponentGroup() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "the ID of the page this component group belongs to",
 				Required:    true,
+				ForceNew:    true,
 			},
 			"components": {
 				Type:        schema.TypeSet,

@@ -14,6 +14,7 @@ jobs:
           DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
           DATADOG_APPLICATION_KEY: ${{ secrets.DATADOG_APPLICATION_KEY }}
           STATUSPAGE_PAGE: ${{ secrets.STATUSPAGE_PAGE }}
+          STATUSPAGE_PAGE_2: ${{ secrets.STATUSPAGE_PAGE_2 }}
           STATUSPAGE_TOKEN: ${{ secrets.STATUSPAGE_TOKEN }}
 
   goreleaser:
