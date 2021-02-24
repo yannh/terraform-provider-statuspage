@@ -5,14 +5,10 @@ import (
 	"log"
 	"strings"
 
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/helper/validation"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 	sp "github.com/yannh/statuspage-go-sdk"
 )
-
-func s(s string) *string {
-	return &s
-}
 
 func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
