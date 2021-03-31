@@ -108,15 +108,24 @@ func readResource(client IClient, pageID, ID, resourceType string, target interf
 		return err
 	}
 
-	if resp.StatusCode == http.StatusOK {
+	if resp.Body != nil {
 		defer resp.Body.Close()
+	}
+
+	switch resp.StatusCode {
+	case http.StatusOK:
 		bodyBytes, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
 			return err
 		}
 		return json.Unmarshal(bodyBytes, target)
+
+	case http.StatusNotFound:
+		return nil
+
+	default:
+		return fmt.Errorf("could not find %s with ID: %s, http status %d", resourceType, ID, resp.StatusCode)
 	}
-	return fmt.Errorf("could not find %s with ID: %s, http status %d", resourceType, ID, resp.StatusCode)
 }
 
 func updateResource(client IClient, pageID, resourceType, ID string, resource interface{}, result interface{}) error {

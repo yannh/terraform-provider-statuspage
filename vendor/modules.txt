@@ -221,7 +221,7 @@ github.com/ulikunitz/xz/lzma
 # github.com/vmihailenco/msgpack v4.0.1+incompatible
 github.com/vmihailenco/msgpack
 github.com/vmihailenco/msgpack/codes
-# github.com/yannh/statuspage-go-sdk v0.0.0-20200728215729-4e573bdaca67
+# github.com/yannh/statuspage-go-sdk v0.0.0-20210130103813-291d25311f06
 ## explicit
 github.com/yannh/statuspage-go-sdk
 # github.com/zclconf/go-cty v1.0.0

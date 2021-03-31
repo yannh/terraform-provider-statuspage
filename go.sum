@@ -315,6 +315,8 @@ github.com/xiang90/probing v0.0.0-20160813154853-07dd2e8dfe18/go.mod h1:UETIi67q
 github.com/xlab/treeprint v0.0.0-20161029104018-1d6e34225557/go.mod h1:ce1O1j6UtZfjr22oyGxGLbauSBp2YVXpARAosm7dHBg=
 github.com/yannh/statuspage-go-sdk v0.0.0-20200728215729-4e573bdaca67 h1:0xr2LKrKdFHfy9Y5PkY9rOujjHtUSfY6MTwXeN/ABcw=
 github.com/yannh/statuspage-go-sdk v0.0.0-20200728215729-4e573bdaca67/go.mod h1:ACDB9LZMy4Iju+kPn5P/4OlwQsYBbVlfA7b3xaNO7mg=
+github.com/yannh/statuspage-go-sdk v0.0.0-20210130103813-291d25311f06 h1:6FZQYl41eugZqTf1z70dg3mbIiss3GOvGjFaLU2em5U=
+github.com/yannh/statuspage-go-sdk v0.0.0-20210130103813-291d25311f06/go.mod h1:ACDB9LZMy4Iju+kPn5P/4OlwQsYBbVlfA7b3xaNO7mg=
 github.com/zclconf/go-cty v0.0.0-20181129180422-88fbe721e0f8/go.mod h1:xnAOWiHeOqg2nWS62VtQ7pbOu17FtxJNW8RLEih+O3s=
 github.com/zclconf/go-cty v0.0.0-20190516203816-4fecf87372ec/go.mod h1:xnAOWiHeOqg2nWS62VtQ7pbOu17FtxJNW8RLEih+O3s=
 github.com/zclconf/go-cty v1.0.0 h1:EWtv3gKe2wPLIB9hQRQJa7k/059oIfAqcEkCNnaVckk=

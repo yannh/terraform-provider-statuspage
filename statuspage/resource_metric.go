@@ -80,7 +80,10 @@ func resourceMetricRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("y_axis_hidden", *metric.YAxisHidden)
 	d.Set("display", *metric.Display)
 	d.Set("decimal_places", *metric.DecimalPlaces)
-	d.Set("tooltip_description", *metric.TooltipDescription)
+
+	if metric.TooltipDescription != nil {
+		d.Set("tooltip_description", *metric.TooltipDescription)
+	}
 
 	return nil
 }
