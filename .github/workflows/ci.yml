@@ -28,6 +28,12 @@ jobs:
       - name: Unshallow
         run: git fetch --prune --unshallow
 
+      - name: Import GPG key
+        id: import_gpg
+        uses: yannh/ghaction-import-gpg@v2.1.0
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+
       - name: Run GoReleaser
         run: make release
         env:

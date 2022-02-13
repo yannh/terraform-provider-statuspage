@@ -5,3 +5,4 @@ terraform.*
 crash.log
 .envrc
 dist/
+.idea/

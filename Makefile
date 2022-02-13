@@ -50,4 +50,4 @@ update-sdk:
 	go mod vendor
 
 release:
-	docker run -e GITHUB_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.5.0 release --rm-dist
+	docker run -e GITHUB_TOKEN -e GPG_PRIVATE_KEY -e GPG_FINGERPRINT -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.5.0 release --rm-dist
