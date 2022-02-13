@@ -2,7 +2,7 @@
 
 TFPLAN ?= plan.tfplan
 TEST?=$$(go list ./... |grep -v 'vendor')
-GOIMAGE ?= golang:1.14.4
+GOIMAGE ?= golang:1.17.7
 
 export CGO_ENABLED = 0
 export GOFLAGS = -mod=vendor
@@ -27,6 +27,9 @@ build build-static:
 docker-build-static:
 	docker run -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make build-static
 
+goreleaser-build-static:
+	docker run -t -e GOOS=linux -e GOARCH=amd64 -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.5.0 build --single-target --skip-post-hooks --rm-dist --snapshot
+
 init: test build-static
 	terraform init -plugin-dir ./bin
 
@@ -47,4 +50,4 @@ update-sdk:
 	go mod vendor
 
 release:
-	docker run -e GITHUB_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v0.176.0 release --rm-dist
+	docker run -e GITHUB_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.5.0 release --rm-dist
