@@ -23,24 +23,15 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	status := d.Get("status").(string)
 	showcase := d.Get("showcase").(bool)
 	groupId := d.Get("group_id").(string)
-	var inputComponent *sp.Component
+	inputComponent := &sp.Component{
+		Name:               &name,
+		Description:        &description,
+		OnlyShowIfDegraded: &onlyShowIfDegraded,
+		Status:             &status,
+		Showcase:           &showcase,
+	}
 	if groupId != "" {
-		inputComponent = &sp.Component{
-			Name:               &name,
-			Description:        &description,
-			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
-			Showcase:           &showcase,
-			GroupID:            &groupId,
-		}
-	} else {
-		inputComponent = &sp.Component{
-			Name:               &name,
-			Description:        &description,
-			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
-			Showcase:           &showcase,
-		}
+		inputComponent.GroupID = &groupId
 	}
 	component, err := sp.CreateComponent(client, d.Get("page_id").(string), inputComponent)
 	if err != nil {
