@@ -20,6 +20,7 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "group_id", "test group"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "operational"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "true"),
 				),
@@ -29,6 +30,7 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "group_id", "updated group"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
 				),
@@ -49,6 +51,7 @@ func TestAccStatuspageComponentBasicPageIDUpdate(t *testing.T) {
 					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "page_id", pageID),
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "group_id", "test group"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "operational"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "true"),
 				),
@@ -107,6 +110,7 @@ func testAccComponentBasic(rand int) string {
 	resource "statuspage_component" "default" {
 		page_id = "${var.pageid}"
 		name = "${var.name}"
+		group_id = "test group"
 		description = "test component"
 		status = "operational"
 		showcase = true
@@ -128,6 +132,7 @@ func testAccComponentUpdate(rand int) string {
 		page_id = "${var.pageid}"
 		name = "${var.name}"
 		description = "updated component"
+		group_id = "updated group"
 		status = "major_outage"
 		showcase = false
 	}
