@@ -50,7 +50,7 @@ The following arguments are supported:
  * `status` - status of the component - must be one of `operational`, `under_maintenance`, `degraded_performance`, `partial_outage`, `major_outage` or ` `
  * `only_show_if_degraded` (bool) - Should this component be shown component only if in degraded state
  * `showcase` (bool) - Should this component be showcased
- * `group_id` (string) - Component Group ID
+ * `group_id` (Optional) - (string) - Component Group ID
 
 The following attributes are exported:
 

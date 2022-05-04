@@ -184,6 +184,12 @@ func resourceComponent() *schema.Resource {
 				Description: "Component Group Id",
 				Optional:    true,
 				Default:     "",
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					if new == "" {
+					  return true
+					}
+					return false
+				},
 			},
 		},
 	}
