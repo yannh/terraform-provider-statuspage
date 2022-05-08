@@ -1,12 +1,10 @@
 #!/usr/bin/make
 
 TFPLAN ?= plan.tfplan
-TEST?=$$(go list ./... |grep -v 'vendor')
-GOIMAGE ?= golang:1.17.7
+GOIMAGE ?= golang:1.18.1
 
 export CGO_ENABLED = 0
 export GOFLAGS = -mod=vendor
-export GO111MODULE = on
 export GOOS = linux
 export GOARCH = amd64
 
@@ -37,7 +35,7 @@ plan: init
 	terraform plan -out ${TFPLAN}
 
 acc:
-	TF_ACC=1 go test $(TEST) -v -timeout 120m
+	TF_ACC=1 go test ./... -v -timeout 120m -count=1
 
 docker-acc:
 	docker run -e DATADOG_API_KEY -e DATADOG_APPLICATION_KEY -e STATUSPAGE_PAGE -e STATUSPAGE_PAGE_2 -e STATUSPAGE_TOKEN -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make acc
