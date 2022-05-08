@@ -26,7 +26,7 @@ docker-build-static:
 	docker run -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage $(GOIMAGE) make build-static
 
 goreleaser-build-static:
-	docker run -t -e GOOS=linux -e GOARCH=amd64 -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.5.0 build --single-target --skip-post-hooks --rm-dist --snapshot
+	docker run -e GOCACHE=/tmp -v $$PWD/.gitconfig:/root/.gitconfig -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.8.3 build --single-target --skip-post-hooks --rm-dist --snapshot
 
 init: test build-static
 	terraform init -plugin-dir ./bin
@@ -48,4 +48,5 @@ update-sdk:
 	go mod vendor
 
 release:
-	docker run -e GITHUB_TOKEN -e GPG_PRIVATE_KEY -e GPG_FINGERPRINT -t -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.5.0 release --rm-dist
+	docker run -e GITHUB_TOKEN -t -v $$PWD/.gitconfig:/root/.gitconfig -v /var/run/docker.sock:/var/run/docker.sock -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v1.8.3 release --rm-dist
+
