@@ -5,8 +5,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/helper/validation"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	sp "github.com/yannh/statuspage-go-sdk"
 )
 
@@ -62,7 +62,6 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 
 	d.Set("name", component.Name)
 	d.Set("description", component.Description)
-	d.Set("group_id", component.GroupID)
 	d.Set("only_show_if_degraded", component.OnlyShowIfDegraded)
 	d.Set("status", component.Status)
 	d.Set("showcase", component.Showcase)
