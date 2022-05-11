@@ -50,7 +50,7 @@ func resourceComponentGroupRead(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	if componentGroup == nil {
+	if componentGroup == nil || componentGroup.ID == nil {
 		log.Printf("[INFO] Statuspage could not find component group with ID: %s\n", d.Id())
 		d.SetId("")
 		return nil

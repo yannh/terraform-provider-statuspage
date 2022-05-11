@@ -52,7 +52,7 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	if component == nil {
+	if component == nil || component.ID == nil {
 		log.Printf("[INFO] Statuspage could not find component with ID: %s\n", d.Id())
 		d.SetId("")
 		return nil

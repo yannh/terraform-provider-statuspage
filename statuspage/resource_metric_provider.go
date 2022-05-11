@@ -52,7 +52,7 @@ func resourceMetricsProviderRead(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	if mp == nil {
+	if mp == nil || mp.ID == nil {
 		log.Printf("[INFO] Statuspage could not find metrics provider with ID: %s\n", d.Id())
 		d.SetId("")
 		return nil

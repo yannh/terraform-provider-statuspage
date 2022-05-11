@@ -59,7 +59,7 @@ func resourceMetricRead(d *schema.ResourceData, m interface{}) error {
 		return err
 	}
 
-	if metric == nil {
+	if metric == nil || metric.ID == nil {
 		log.Printf("[INFO] Statuspage could not find metric with ID: %s\n", d.Id())
 		d.SetId("")
 		return nil
