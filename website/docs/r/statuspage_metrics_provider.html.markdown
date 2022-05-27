@@ -31,6 +31,7 @@ The following arguments are supported:
  * `api_key` - Required by the Datadog and NewRelic type metrics providers.
  * `api_token` - Required by the Librato and Pingdom-type metrics provider.
  * `application_key` - Required by the Pingdom and Datadog type metrics providers.
+ * `metric_base_uri` - Required by the Datadog type metrics provider, example: `https://app.datadoghq.com/api/v1`
 
 ## Import
 
