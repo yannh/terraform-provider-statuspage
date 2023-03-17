@@ -3,6 +3,7 @@ package statuspage
 import (
 	"fmt"
 	"log"
+	"regexp"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -22,6 +23,7 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
 	status := d.Get("status").(string)
 	showcase := d.Get("showcase").(bool)
+	startDate := d.Get("start_date").(string)
 
 	component, err := sp.CreateComponent(
 		client, d.Get("page_id").(string),
@@ -31,6 +33,7 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 			OnlyShowIfDegraded: &onlyShowIfDegraded,
 			Status:             &status,
 			Showcase:           &showcase,
+			StartDate:          &startDate,
 		},
 	)
 	if err != nil {
@@ -66,6 +69,7 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("status", component.Status)
 	d.Set("showcase", component.Showcase)
 	d.Set("automation_email", component.AutomationEmail)
+	d.Set("start_date", component.StartDate)
 
 	return nil
 }
@@ -79,6 +83,7 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
 	status := d.Get("status").(string)
 	showcase := d.Get("showcase").(bool)
+	startDate := d.Get("start_date").(string)
 
 	_, err := sp.UpdateComponent(
 		client,
@@ -90,6 +95,7 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 			OnlyShowIfDegraded: &onlyShowIfDegraded,
 			Status:             &status,
 			Showcase:           &showcase,
+			StartDate:          &startDate,
 		},
 	)
 	if err != nil {
@@ -176,6 +182,15 @@ func resourceComponent() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "Email address to send automation events to",
 				Computed:    true,
+			},
+			"start_date": {
+				Type:        schema.TypeString,
+				Description: "Start date of component",
+				Optional:    true,
+				ValidateFunc: validation.StringMatch(
+					regexp.MustCompile("(^(19|20)[0-9]{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$)?"),
+					"A valid date must be supplied in the format yyyy-mm-dd",
+				),
 			},
 		},
 	}
