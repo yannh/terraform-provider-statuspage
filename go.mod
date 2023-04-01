@@ -12,7 +12,7 @@ require (
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/oklog/run v1.1.0 // indirect
 	github.com/vmihailenco/tagparser v0.1.2 // indirect
-	github.com/yannh/statuspage-go-sdk v0.0.0-20211226202911-2b762d9f3043
+	github.com/yannh/statuspage-go-sdk v0.0.0-20230401171921-ef521413bcb2
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
 	golang.org/x/sys v0.0.0-20220503163025-988cb79eb6c6 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
