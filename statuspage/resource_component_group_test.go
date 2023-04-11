@@ -76,6 +76,7 @@ func testAccComponentGroupBasic(rand int) string {
 		name = "${var.component_name}_component"
 		description = "test component"
 		status = "operational"
+		start_date = "2023-01-01"
 	}
 
 	resource "statuspage_component_group" "default" {
@@ -102,6 +103,7 @@ func testAccComponentGroupUpdate(rand int) string {
 		name = "${var.component_name}_component"
 		description = "test component"
 		status = "operational"
+		start_date = "2023-01-01"
 	}
 
 	resource "statuspage_component" "comp2" {
@@ -109,6 +111,7 @@ func testAccComponentGroupUpdate(rand int) string {
 		name = "${var.component_name}_component"
 		description = "test component"
 		status = "operational"
+		start_date = "2023-01-01"
 	}
 
 	resource "statuspage_component" "comp3" {
@@ -116,6 +119,7 @@ func testAccComponentGroupUpdate(rand int) string {
 		name = "${var.component_name}_component"
 		description = "test component"
 		status = "operational"
+		start_date = "2023-01-01"
 	}
 
 	resource "statuspage_component" "comp4" {
@@ -123,6 +127,7 @@ func testAccComponentGroupUpdate(rand int) string {
 		name = "${var.component_name}_component"
 		description = "test component"
 		status = "operational"
+		start_date = "2023-01-01"
 	}
 
 	resource "statuspage_component_group" "default" {

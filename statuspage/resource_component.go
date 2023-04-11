@@ -11,29 +11,47 @@ import (
 	sp "github.com/yannh/statuspage-go-sdk"
 )
 
+func b(b bool) *bool {
+	return &b
+}
+
 func s(s string) *string {
 	return &s
+}
+
+func getOptionalBool(d *schema.ResourceData, key string) *bool {
+	if value, ok := d.GetOk(key); ok {
+		return b(value.(bool))
+	}
+	return nil
+}
+
+func getOptionalString(d *schema.ResourceData, key string) *string {
+	if value, ok := d.GetOk(key); ok {
+		return s(value.(string))
+	}
+	return nil
 }
 
 func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 
-	name := d.Get("name").(string)
-	description := d.Get("description").(string)
-	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
-	status := d.Get("status").(string)
-	showcase := d.Get("showcase").(bool)
-	startDate := d.Get("start_date").(string)
+	name := s(d.Get("name").(string))
+	description := getOptionalString(d, "description")
+	onlyShowIfDegraded := getOptionalBool(d, "only_show_if_degraded")
+	status := getOptionalString(d, "status")
+	showcase := getOptionalBool(d, "showcase")
+	startDate := getOptionalString(d, "start_date")
 
 	component, err := sp.CreateComponent(
 		client, d.Get("page_id").(string),
 		&sp.Component{
-			Name:               &name,
-			Description:        &description,
-			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
-			Showcase:           &showcase,
-			StartDate:          &startDate,
+			Name:               name,
+			Description:        description,
+			OnlyShowIfDegraded: onlyShowIfDegraded,
+			Status:             status,
+			Showcase:           showcase,
+			StartDate:          startDate,
 		},
 	)
 	if err != nil {
@@ -78,24 +96,24 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	componentID := d.Id()
 
-	name := d.Get("name").(string)
-	description := d.Get("description").(string)
-	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
-	status := d.Get("status").(string)
-	showcase := d.Get("showcase").(bool)
-	startDate := d.Get("start_date").(string)
+	name := s(d.Get("name").(string))
+	description := getOptionalString(d, "description")
+	onlyShowIfDegraded := getOptionalBool(d, "only_show_if_degraded")
+	status := getOptionalString(d, "status")
+	showcase := getOptionalBool(d, "showcase")
+	startDate := getOptionalString(d, "start_date")
 
 	_, err := sp.UpdateComponent(
 		client,
 		d.Get("page_id").(string),
 		componentID,
 		&sp.Component{
-			Name:               &name,
-			Description:        &description,
-			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
-			Showcase:           &showcase,
-			StartDate:          &startDate,
+			Name:               name,
+			Description:        description,
+			OnlyShowIfDegraded: onlyShowIfDegraded,
+			Status:             status,
+			Showcase:           showcase,
+			StartDate:          startDate,
 		},
 	)
 	if err != nil {
