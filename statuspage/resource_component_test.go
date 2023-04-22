@@ -31,35 +31,6 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
-				),
-			},
-		},
-	})
-}
-
-func TestAccStatuspageComponentWithStartDate(t *testing.T) {
-	rid := acctest.RandIntRange(1000, 9999)
-	resource.Test(t, resource.TestCase{
-		PreCheck:  func() { testAccPreCheck(t) },
-		Providers: testAccProviders,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccComponentBasic(rid),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "status", "operational"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "true"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
-				),
-			},
-			{
-				Config: testAccComponentUpdate(rid),
-				Check: resource.ComposeTestCheckFunc(
-					resource.TestCheckResourceAttrSet("statuspage_component.default", "id"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
 				),
 			},
@@ -160,6 +131,7 @@ func testAccComponentUpdate(rand int) string {
 		description = "updated component"
 		status = "major_outage"
 		showcase = false
+		start_date = "2023-01-01"
 	}
 	`, rand, pageID)
 }
