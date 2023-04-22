@@ -62,3 +62,13 @@ $ export DATADOG_APPLICATION_KEY=zzz
 ```sh
 $ make test acc
 ```
+
+## Extra Notes
+
+### Group Id integration
+
+Introducing `group_id` parameter within the component creation has introduced a limitation in the flow of creating `statuspage_component_group` and `statuspage_component`. 
+
+Creating `statuspage_component` without `group_id` configured leads to it being highlighted as empty string on the terraform local state whereas configuring the `statuspage_component_group` resource within the IaC can lead to the remote state being changed, this in turn leads to a difference in terraform plan. For `group_id` parameter in `statuspage_component`, `DiffSuppressFunc` has been added to ignore terraform plan diff when new `group_id` is expected to be an empty string.
+
+This chicken and egg problem can happen for the `statuspage_component_group` terraform resource as well, so in that case `group_id` should be only set on the `statuspage_component` resource when `statuspage_component_group` is not included within IaC.

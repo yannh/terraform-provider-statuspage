@@ -22,17 +22,18 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
 	status := d.Get("status").(string)
 	showcase := d.Get("showcase").(bool)
-
-	component, err := sp.CreateComponent(
-		client, d.Get("page_id").(string),
-		&sp.Component{
-			Name:               &name,
-			Description:        &description,
-			OnlyShowIfDegraded: &onlyShowIfDegraded,
-			Status:             &status,
-			Showcase:           &showcase,
-		},
-	)
+	groupId := d.Get("group_id").(string)
+	inputComponent := &sp.Component{
+		Name:               &name,
+		Description:        &description,
+		OnlyShowIfDegraded: &onlyShowIfDegraded,
+		Status:             &status,
+		Showcase:           &showcase,
+	}
+	if groupId != "" {
+		inputComponent.GroupID = &groupId
+	}
+	component, err := sp.CreateComponent(client, d.Get("page_id").(string), inputComponent)
 	if err != nil {
 		log.Printf("[WARN] Statuspage Failed creating component: %s\n", err)
 		return err
@@ -176,6 +177,18 @@ func resourceComponent() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "Email address to send automation events to",
 				Computed:    true,
+			},
+			"group_id": {
+				Type:        schema.TypeString,
+				Description: "Component Group Id",
+				Optional:    true,
+				Default:     "",
+				DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+					if new == "" {
+					  return true
+					}
+					return false
+				},
 			},
 		},
 	}
