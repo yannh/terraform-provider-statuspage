@@ -109,6 +109,7 @@ func testAccComponentGroupUpdate(rand int) string {
 		name = "${var.component_name}_component"
 		description = "test component"
 		status = "operational"
+		start_date = "2023-01-01"
 	}
 
 	resource "statuspage_component" "comp3" {

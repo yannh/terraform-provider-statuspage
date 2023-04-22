@@ -7,6 +7,7 @@ type Component struct {
 	Showcase           *bool   `json:"showcase,omitempty"`
 	Status             *string `json:"status,omitempty"`
 	OnlyShowIfDegraded *bool   `json:"only_show_if_degraded,omitempty"`
+	StartDate          *string `json:"start_date,omitempty"`
 }
 
 type ComponentFull struct {
