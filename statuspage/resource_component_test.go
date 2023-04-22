@@ -22,7 +22,6 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "operational"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "true"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
 				),
 			},
 			{
@@ -32,7 +31,6 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
 				),
 			},
 		},
@@ -53,7 +51,6 @@ func TestAccStatuspageComponentBasicPageIDUpdate(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "test component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "operational"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "true"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
 				),
 			},
 			{
@@ -64,7 +61,6 @@ func TestAccStatuspageComponentBasicPageIDUpdate(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
-					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
 				),
 			},
 		},
@@ -114,7 +110,6 @@ func testAccComponentBasic(rand int) string {
 		description = "test component"
 		status = "operational"
 		showcase = true
-		start_date = "2023-01-01"
 	}
 	`, rand, pageID)
 }
@@ -135,7 +130,6 @@ func testAccComponentUpdate(rand int) string {
 		description = "updated component"
 		status = "major_outage"
 		showcase = false
-		start_date = "2023-01-01"
 	}
 	`, rand, pageID)
 }
@@ -156,7 +150,6 @@ func testAccComponentUpdatePageID(rand int) string {
 		description = "updated component"
 		status = "major_outage"
 		showcase = false
-		start_date = "2023-01-01"
 	}
 	`, rand, pageID2)
 }
