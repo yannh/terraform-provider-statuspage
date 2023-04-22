@@ -3,7 +3,6 @@ package statuspage
 import (
 	"fmt"
 	"log"
-	"regexp"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -11,47 +10,27 @@ import (
 	sp "github.com/yannh/statuspage-go-sdk"
 )
 
-func b(b bool) *bool {
-	return &b
-}
-
 func s(s string) *string {
 	return &s
-}
-
-func getOptionalBool(d *schema.ResourceData, key string) *bool {
-	if value, ok := d.GetOk(key); ok {
-		return b(value.(bool))
-	}
-	return nil
-}
-
-func getOptionalString(d *schema.ResourceData, key string) *string {
-	if value, ok := d.GetOk(key); ok {
-		return s(value.(string))
-	}
-	return nil
 }
 
 func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 
-	name := s(d.Get("name").(string))
-	description := getOptionalString(d, "description")
-	onlyShowIfDegraded := getOptionalBool(d, "only_show_if_degraded")
-	status := getOptionalString(d, "status")
-	showcase := getOptionalBool(d, "showcase")
-	startDate := getOptionalString(d, "start_date")
+	name := d.Get("name").(string)
+	description := d.Get("description").(string)
+	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
+	status := d.Get("status").(string)
+	showcase := d.Get("showcase").(bool)
 
 	component, err := sp.CreateComponent(
 		client, d.Get("page_id").(string),
 		&sp.Component{
-			Name:               name,
-			Description:        description,
-			OnlyShowIfDegraded: onlyShowIfDegraded,
-			Status:             status,
-			Showcase:           showcase,
-			StartDate:          startDate,
+			Name:               &name,
+			Description:        &description,
+			OnlyShowIfDegraded: &onlyShowIfDegraded,
+			Status:             &status,
+			Showcase:           &showcase,
 		},
 	)
 	if err != nil {
@@ -87,7 +66,6 @@ func resourceComponentRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("status", component.Status)
 	d.Set("showcase", component.Showcase)
 	d.Set("automation_email", component.AutomationEmail)
-	d.Set("start_date", component.StartDate)
 
 	return nil
 }
@@ -96,24 +74,22 @@ func resourceComponentUpdate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	componentID := d.Id()
 
-	name := s(d.Get("name").(string))
-	description := getOptionalString(d, "description")
-	onlyShowIfDegraded := getOptionalBool(d, "only_show_if_degraded")
-	status := getOptionalString(d, "status")
-	showcase := getOptionalBool(d, "showcase")
-	startDate := getOptionalString(d, "start_date")
+	name := d.Get("name").(string)
+	description := d.Get("description").(string)
+	onlyShowIfDegraded := d.Get("only_show_if_degraded").(bool)
+	status := d.Get("status").(string)
+	showcase := d.Get("showcase").(bool)
 
 	_, err := sp.UpdateComponent(
 		client,
 		d.Get("page_id").(string),
 		componentID,
 		&sp.Component{
-			Name:               name,
-			Description:        description,
-			OnlyShowIfDegraded: onlyShowIfDegraded,
-			Status:             status,
-			Showcase:           showcase,
-			StartDate:          startDate,
+			Name:               &name,
+			Description:        &description,
+			OnlyShowIfDegraded: &onlyShowIfDegraded,
+			Status:             &status,
+			Showcase:           &showcase,
 		},
 	)
 	if err != nil {
@@ -200,15 +176,6 @@ func resourceComponent() *schema.Resource {
 				Type:        schema.TypeString,
 				Description: "Email address to send automation events to",
 				Computed:    true,
-			},
-			"start_date": {
-				Type:        schema.TypeString,
-				Description: "Start date of component",
-				Optional:    true,
-				ValidateFunc: validation.StringMatch(
-					regexp.MustCompile("(^(19|20)[0-9]{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$)?"),
-					"A valid date must be supplied in the format yyyy-mm-dd",
-				),
 			},
 		},
 	}
