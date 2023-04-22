@@ -7,6 +7,7 @@ type Component struct {
 	Showcase           *bool   `json:"showcase,omitempty"`
 	Status             *string `json:"status,omitempty"`
 	OnlyShowIfDegraded *bool   `json:"only_show_if_degraded,omitempty"`
+	StartDate          *string `json:"start_date,omitempty"`
 }
 
 type ComponentFull struct {
@@ -17,6 +18,7 @@ type ComponentFull struct {
 	CreatedAt       *string `json:"created_at"`
 	UpdatedAt       *string `json:"updated_at"`
 	AutomationEmail *string `json:"automation_email"`
+	StartDate       *string `json:"start_date,omitempty"`
 }
 
 func CreateComponent(client *Client, pageID string, component *Component) (*ComponentFull, error) {

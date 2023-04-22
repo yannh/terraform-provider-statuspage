@@ -31,6 +31,7 @@ func TestAccStatuspageComponentBasic(t *testing.T) {
 					resource.TestCheckResourceAttr("statuspage_component.default", "description", "updated component"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "status", "major_outage"),
 					resource.TestCheckResourceAttr("statuspage_component.default", "showcase", "false"),
+					resource.TestCheckResourceAttr("statuspage_component.default", "start_date", "2023-01-01"),
 				),
 			},
 		},
@@ -130,6 +131,7 @@ func testAccComponentUpdate(rand int) string {
 		description = "updated component"
 		status = "major_outage"
 		showcase = false
+		start_date = "2023-01-01"
 	}
 	`, rand, pageID)
 }
