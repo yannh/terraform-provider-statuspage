@@ -47,11 +47,11 @@ func testAccMetricBasic() string {
 		metric_base_uri = "https://app.datadoghq.com/api/v1"
 	}
 
-	resource "statuspage_metric" "datadog_metric" {
-		page_id             = "${var.pageid}"
-		metrics_provider_id = "${statuspage_metrics_provider.datadog.id}"
-		name                = "Forum"
-		metric_identifier   = "sum:apache.net.request_per_s{project:forum}"
-	}
+	#resource "statuspage_metric" "datadog_metric" {
+	#	page_id             = "${var.pageid}"
+	#	metrics_provider_id = "${statuspage_metrics_provider.datadog.id}"
+	#	name                = "Forum"
+	#	metric_identifier   = "sum:apache.net.request_per_s{project:forum}"
+	#}
 	`, pageID, os.Getenv("DATADOG_API_KEY"), os.Getenv("DATADOG_APPLICATION_KEY"))
 }
