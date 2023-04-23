@@ -5,22 +5,24 @@ import (
 	"os"
 	"testing"
 	//	"github.com/hashicorp/terraform/helper/resource"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 )
 
 func TestAccStatuspageMetricBasic(t *testing.T) {
-	//	resource.Test(t, resource.TestCase{
-	//		PreCheck:  func() { testAccPreCheck(t) },
-	//		Providers: testAccProviders,
-	//		Steps: []resource.TestStep{
-	//			{
-	//				Config: testAccMetric_basic(),
-	//				Check: resource.ComposeTestCheckFunc(
-	//					resource.TestCheckResourceAttrSet("statuspage_metrics_provider.datadog", "id"),
-	//					resource.TestCheckResourceAttr("statuspage_metrics_provider.datadog", "type", "Datadog"),
-	//				),
-	//			},
-	//		},
-	//	})
+	resource.Test(t, resource.TestCase{
+		PreCheck:  func() { testAccPreCheck(t) },
+		Providers: testAccProviders,
+		Steps: []resource.TestStep{
+			{
+				Config: testAccMetricBasic(),
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttrSet("statuspage_metrics_provider.datadog", "id"),
+					resource.TestCheckResourceAttr("statuspage_metrics_provider.datadog", "type", "Datadog"),
+				),
+			},
+		},
+	})
 }
 
 func testAccMetricBasic() string {
@@ -42,6 +44,7 @@ func testAccMetricBasic() string {
 		api_key = "${var.api_key}"
 		application_key = "${var.application_key}"
 		type = "Datadog"
+		metric_base_uri = "https://app.datadoghq.com/api/v1"
 	}
 
 	resource "statuspage_metric" "datadog_metric" {

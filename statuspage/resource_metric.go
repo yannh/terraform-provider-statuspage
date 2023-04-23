@@ -14,14 +14,14 @@ func resourceMetricCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 	name := d.Get("name").(string)
 	metricIdentifier := d.Get("metric_identifier").(string)
-	transform := d.Get("transform").(string)
-	suffix := d.Get("suffix").(string)
-	yAxisMin := d.Get("y_axis_min").(float64)
-	yAxisMax := d.Get("y_axis_max").(float64)
-	yAxisHidden := d.Get("y_axis_hidden").(bool)
-	display := d.Get("display").(bool)
-	decimalPlaces := d.Get("decimal_places").(int)
-	tooltipDescription := d.Get("tooltip_description").(string)
+	transform := getOptionalString(d, "transform")
+	suffix := getOptionalString(d, "suffix")
+	yAxisMin := getOptionalFloat(d, "y_axis_min")
+	yAxisMax := getOptionalFloat(d, "y_axis_max")
+	yAxisHidden := getOptionalBool(d, "y_axis_hidden")
+	display := getOptionalBool(d, "display")
+	decimalPlaces := getOptionalInt(d, "decimal_places")
+	tooltipDescription := getOptionalString(d, "tooltip_description")
 
 	metric, err := sp.CreateMetric(
 		client,
@@ -30,14 +30,14 @@ func resourceMetricCreate(d *schema.ResourceData, m interface{}) error {
 		&sp.Metric{
 			Name:               &name,
 			MetricIdentifier:   &metricIdentifier,
-			Transform:          &transform,
-			Suffix:             &suffix,
-			YAxisMin:           &yAxisMin,
-			YAxisMax:           &yAxisMax,
-			YAxisHidden:        &yAxisHidden,
-			Display:            &display,
-			DecimalPlaces:      &decimalPlaces,
-			TooltipDescription: &tooltipDescription,
+			Transform:          transform,
+			Suffix:             suffix,
+			YAxisMin:           yAxisMin,
+			YAxisMax:           yAxisMax,
+			YAxisHidden:        yAxisHidden,
+			Display:            display,
+			DecimalPlaces:      decimalPlaces,
+			TooltipDescription: tooltipDescription,
 		},
 	)
 	if err != nil {

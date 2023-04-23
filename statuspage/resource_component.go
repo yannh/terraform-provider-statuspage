@@ -11,32 +11,10 @@ import (
 	sp "github.com/yannh/statuspage-go-sdk"
 )
 
-func b(b bool) *bool {
-	return &b
-}
-
-func s(s string) *string {
-	return &s
-}
-
-func getOptionalBool(d *schema.ResourceData, key string) *bool {
-	if value, ok := d.GetOk(key); ok {
-		return b(value.(bool))
-	}
-	return nil
-}
-
-func getOptionalString(d *schema.ResourceData, key string) *string {
-	if value, exists := d.GetOk(key); exists {
-		return s(value.(string))
-	}
-	return nil
-}
-
 func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
 
-	name := s(d.Get("name").(string))
+	name := d.Get("name").(string)
 	description := getOptionalString(d, "description")
 	onlyShowIfDegraded := getOptionalBool(d, "only_show_if_degraded")
 	status := getOptionalString(d, "status")
@@ -46,7 +24,7 @@ func resourceComponentCreate(d *schema.ResourceData, m interface{}) error {
 	component, err := sp.CreateComponent(
 		client, d.Get("page_id").(string),
 		&sp.Component{
-			Name:               name,
+			Name:               &name,
 			Description:        description,
 			OnlyShowIfDegraded: onlyShowIfDegraded,
 			Status:             status,

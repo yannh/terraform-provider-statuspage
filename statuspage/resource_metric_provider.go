@@ -12,24 +12,24 @@ import (
 
 func resourceMetricsProviderCreate(d *schema.ResourceData, m interface{}) error {
 	client := m.(*sp.Client)
-	email := d.Get("email").(string)
-	password := d.Get("password").(string)
+	email := getOptionalString(d, "email")
+	password := getOptionalString(d, "password")
 	aPIKey := d.Get("api_key").(string)
-	aPIToken := d.Get("api_token").(string)
+	aPIToken := getOptionalString(d, "api_token")
 	applicationKey := d.Get("application_key").(string)
-	baseUri := d.Get("metric_base_uri").(string)
+	baseUri := getOptionalString(d, "metric_base_uri")
 	t := d.Get("type").(string)
 
 	mp, err := sp.CreateMetricsProvider(
 		client,
 		d.Get("page_id").(string),
 		&sp.MetricsProvider{
-			Email:          &email,
-			Password:       &password,
+			Email:          email,
+			Password:       password,
 			APIKey:         &aPIKey,
-			APIToken:       &aPIToken,
+			APIToken:       aPIToken,
 			ApplicationKey: &applicationKey,
-			MetricBaseUri:  &baseUri,
+			MetricBaseUri:  baseUri,
 			Type:           &t,
 		},
 	)
