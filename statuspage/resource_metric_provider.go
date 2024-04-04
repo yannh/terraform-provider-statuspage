@@ -179,7 +179,7 @@ func resourceMetricsProvider() *schema.Resource {
 			},
 			"metric_base_uri": &schema.Schema{
 				Type:        schema.TypeString,
-				Description: "Required by the NewRelic-type metrics provider",
+				Description: "Required by the Datadog and NewRelic-type metrics provider",
 				Optional:    true,
 			},
 		},
