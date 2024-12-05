@@ -153,7 +153,7 @@ github.com/vmihailenco/msgpack/v4/codes
 github.com/vmihailenco/tagparser
 github.com/vmihailenco/tagparser/internal
 github.com/vmihailenco/tagparser/internal/parser
-# github.com/yannh/statuspage-go-sdk v0.0.0-20230401171921-ef521413bcb2
+# github.com/yannh/statuspage-go-sdk v0.0.0-20241205092144-2638993701ef
 ## explicit
 github.com/yannh/statuspage-go-sdk
 # github.com/zclconf/go-cty v1.10.0
