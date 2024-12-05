@@ -67,6 +67,9 @@ func (mp *MetricsProvider) validate() error {
 		if *mp.ApplicationKey == "" {
 			return fmt.Errorf("parameter application_key is required for Datadog Metrics Provider")
 		}
+		if *mp.MetricBaseUri == "" {
+			return fmt.Errorf("parameter metric_base_uri is required for Datadog Metrics Provider")
+		}
 	}
 
 	return nil

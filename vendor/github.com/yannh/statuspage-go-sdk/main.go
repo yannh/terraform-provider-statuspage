@@ -7,7 +7,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"time"
 )
 
 const apiRoot = "https://api.statuspage.io/v1"
@@ -29,7 +28,7 @@ type Client struct {
 func NewClient(token string) *Client {
 	return &Client{
 		token:      token,
-		httpClient: &http.Client{},
+		httpClient: NewRetryableClient().StandardClient(),
 	}
 }
 
@@ -58,17 +57,7 @@ func (client *Client) doHTTPRequest(method, endpoint string, item interface{}) (
 	}
 	req.Header.Set("Authorization", "OAuth "+client.token)
 
-	maxRetries := 10
-	retryInterval := 10 * time.Second
-
-	// Basic Retry logic around rate limiting
 	resp, err = client.httpClient.Do(req)
-	retries := 0
-	for retries = 1; resp != nil && resp.StatusCode == 420 && retries <= maxRetries; retries = retries + 1 {
-		time.Sleep(retryInterval)
-		resp, err = client.httpClient.Do(req)
-	}
-
 	return resp, err
 }
 
