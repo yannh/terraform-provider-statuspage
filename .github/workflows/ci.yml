@@ -36,11 +36,11 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
 
-      - name: Run GoReleaser
-        uses: yannh/goreleaser-action@v2.8.1
-        with:
-          version: latest
-          args: release --rm-dist
+      - name: goreleaser
+        run: |
+          echo "${{ github.token }}" | docker login https://ghcr.io -u ${GITHUB_ACTOR} --password-stdin
+          GITHUB_ACTOR=$(echo ${GITHUB_ACTOR} | tr '[:upper:]' '[:lower:]')
+          GIT_OWNER=${GITHUB_ACTOR} make release
         env:
-          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
