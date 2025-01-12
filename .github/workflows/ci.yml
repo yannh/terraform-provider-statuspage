@@ -36,11 +36,15 @@ jobs:
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
 
+      - name: Install GoReleaser
+        run: |
+          curl -sL https://github.com/goreleaser/goreleaser/releases/download/v2.5.1/goreleaser_Linux_x86_64.tar.gz | tar -xz -C /usr/local/bin
+
       - name: goreleaser
         run: |
           echo "${{ github.token }}" | docker login https://ghcr.io -u ${GITHUB_ACTOR} --password-stdin
           GITHUB_ACTOR=$(echo ${GITHUB_ACTOR} | tr '[:upper:]' '[:lower:]')
-          GIT_OWNER=${GITHUB_ACTOR} make release
+          GIT_OWNER=${GITHUB_ACTOR} make goreleaser-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
