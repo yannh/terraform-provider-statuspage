@@ -48,5 +48,5 @@ update-sdk:
 	go mod vendor
 
 release:
-	docker run -e GITHUB_TOKEN -e GPG_FINGERPRINT -t -v $$PWD/.gitconfig:/root/.gitconfig -v /var/run/docker.sock:/var/run/docker.sock -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v2.4.8 release --clean
+	docker run -e GITHUB_TOKEN -e GPG_FINGERPRINT -t -v $$PWD/.gitconfig:/root/.gitconfig -v /var/run/docker.sock:/var/run/docker.sock -v ~/.gnupg:/root/.gnupg:ro -v $$PWD:/go/src/github.com/yannh/terraform-provider-statuspage -w /go/src/github.com/yannh/terraform-provider-statuspage goreleaser/goreleaser:v2.4.8 release --clean
 
