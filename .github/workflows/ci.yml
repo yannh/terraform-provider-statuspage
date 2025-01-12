@@ -32,9 +32,9 @@ jobs:
 
       - name: Import GPG key
         id: import_gpg
-        uses: yannh/ghaction-import-gpg@v2.1.0
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        uses: yannh/ghaction-import-gpg-crazy@v6.2.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - name: Run GoReleaser
         uses: yannh/goreleaser-action@v2.8.1
