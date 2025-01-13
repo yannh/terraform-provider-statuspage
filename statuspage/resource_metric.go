@@ -74,13 +74,26 @@ func resourceMetricRead(d *schema.ResourceData, m interface{}) error {
 		// See https://developer.statuspage.io/#operation/getPagesPageIdMetricsMetricId
 		d.Set("transform", *metric.Transform)
 	}
-	d.Set("suffix", *metric.Suffix)
-	d.Set("y_axis_min", *metric.YAxisMin)
-	d.Set("y_axis_max", *metric.YAxisMax)
-	d.Set("y_axis_hidden", *metric.YAxisHidden)
-	d.Set("display", *metric.Display)
-	d.Set("decimal_places", *metric.DecimalPlaces)
 
+	// statuspage.io api does not return default values for these fields if they are not initially set
+	if metric.Suffix != nil {
+		d.Set("suffix", *metric.Suffix)
+	}
+	if metric.YAxisMin != nil {
+		d.Set("y_axis_min", *metric.YAxisMin)
+	}
+	if metric.YAxisMax != nil {
+		d.Set("y_axis_max", *metric.YAxisMax)
+	}
+	if metric.YAxisHidden != nil {
+		d.Set("y_axis_hidden", *metric.YAxisHidden)
+	}
+	if metric.Display != nil {
+		d.Set("display", *metric.Display)
+	}
+	if metric.DecimalPlaces != nil {
+		d.Set("decimal_places", *metric.DecimalPlaces)
+	}
 	if metric.TooltipDescription != nil {
 		d.Set("tooltip_description", *metric.TooltipDescription)
 	}
